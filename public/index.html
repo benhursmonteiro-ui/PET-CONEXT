@@ -1,0 +1,1263 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Conexão Pet 🐶🐱 - A Rede Social e Ecossistema do seu Pet</title>
+    
+    <!-- PWA Meta Tags -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#820ad1">
+    <link rel="apple-touch-icon" href="assets/logo.png">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Leaflet Map Library -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <!-- Main Style Sheet -->
+    <link rel="stylesheet" href="styles.css?v=1.0.5">
+</head>
+<body>
+    <!-- App Container -->
+    <div class="app-container">
+        <!-- Backdrop para fechar o menu lateral no mobile ao clicar fora -->
+        <div class="sidebar-backdrop" id="sidebar-backdrop" onclick="toggleMobileMenu()"></div>
+        
+        <!-- Sidebar Navigation (Desktop) -->
+        <aside class="sidebar">
+            <div class="brand">
+                <span class="brand-icon">🐾</span>
+                <h1 class="brand-name">Conexão Pet</h1>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <button class="nav-item active" data-tab="feed">
+                    <svg viewBox="0 0 24 24" class="nav-icon"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+                    <span>Feed Social</span>
+                </button>
+                <button class="nav-item" data-tab="reels">
+                    <svg viewBox="0 0 24 24" class="nav-icon"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8 12.5v-9l6 4.5-6 4.5z"/></svg>
+                    <span>Reels & Vídeos</span>
+                </button>
+                
+                <button class="btn btn-primary" style="margin: 8px 16px 16px 16px; width: calc(100% - 32px); font-weight: bold; font-size: 14px; display:flex; justify-content:center;" onclick="openModal('create-post-modal')">
+                    + Criar Postagem
+                </button>
+
+                <button class="nav-item" data-tab="friends">
+                    <svg viewBox="0 0 24 24" class="nav-icon"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.53c-.26-.81-1-1.4-1.9-1.4h-1v-3c0-.55-.45-1-1-1h-6v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+                    <span>Amigos & Chat</span>
+                </button>
+                <button class="nav-item" data-tab="communities">
+                    <svg viewBox="0 0 24 24" class="nav-icon"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+                    <span>Comunidades</span>
+                </button>
+                <button class="nav-item" data-tab="adoption">
+                    <svg viewBox="0 0 24 24" class="nav-icon"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                    <span>Adoção</span>
+                    <span class="badge" id="adopt-badge">Novo</span>
+                </button>
+                <button class="nav-item" data-tab="health">
+                    <svg viewBox="0 0 24 24" class="nav-icon"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>
+                    <span>Saúde & Gráficos</span>
+                </button>
+                <button class="nav-item" data-tab="events">
+                    <svg viewBox="0 0 24 24" class="nav-icon"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2zm-7 5h5v5h-5z"/></svg>
+                    <span>Eventos</span>
+                </button>
+                <button class="nav-item" data-tab="institutions">
+                    <svg viewBox="0 0 24 24" class="nav-icon"><path d="M12 2L2 22h20L12 2zm0 3.82L17.18 16H6.82L12 5.82zM11 10h2v4h-2v-4zm0 5h2v2h-2v-2z"/></svg>
+                    <span>Instituições & Mapa</span>
+                </button>
+                <button class="nav-item" data-tab="safety">
+                    <svg viewBox="0 0 24 24" class="nav-icon" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                    <span>Segurança</span>
+                </button>
+                <button class="nav-item" data-tab="profile">
+                    <svg viewBox="0 0 24 24" class="nav-icon"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                    <span>Perfil</span>
+                </button>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="theme-toggle" id="theme-btn" style="cursor: pointer;">
+                    <span class="theme-icon" id="theme-icon">☀️</span>
+                    <span class="theme-text" id="theme-text">Modo Escuro</span>
+                </div>
+                <div class="theme-toggle" id="logout-btn" onclick="document.body.classList.add('logged-out'); state.loggedIn = false; navigateToTab('landing');" style="margin-top: 8px; color: var(--secondary); cursor: pointer;">
+                    <span class="theme-icon">🚪</span>
+                    <span class="theme-text" style="font-weight: 600;">Sair da Conta</span>
+                </div>
+                <div class="tutor-mini-profile" id="mini-profile-btn">
+                    <img src="assets/dog_avatar.png" alt="Tutor Avatar" class="mini-avatar" id="sidebar-tutor-img">
+                    <div class="mini-info">
+                        <span class="mini-name" id="sidebar-tutor-name">Carregando...</span>
+                        <span class="mini-sub">Tutor de 2 pets</span>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Window Container -->
+        <main class="main-content">
+            
+            <!-- Global Top Bar (Mobile header & alerts indicators) -->
+            <header class="top-bar">
+                <div class="mobile-brand">
+                    <button class="menu-toggle-btn" id="menu-toggle-btn" onclick="toggleMobileMenu()" aria-label="Menu principal">
+                        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="3" y1="12" x2="21" y2="12"></line>
+                            <line x1="3" y1="6" x2="21" y2="6"></line>
+                            <line x1="3" y1="18" x2="21" y2="18"></line>
+                        </svg>
+                    </button>
+                    <span class="brand-icon">🐾</span>
+                    <h1 class="brand-name">Conexão Pet</h1>
+                </div>
+
+                <!-- Global Search Bar (Desktop) -->
+                <div class="topbar-search-wrap" id="topbar-search-wrap">
+                    <span class="topbar-search-icon">🔍</span>
+                    <input
+                        type="text"
+                        id="topbar-search-input"
+                        class="topbar-search-input"
+                        placeholder="Pesquisar em Conexão Pet..."
+                        onfocus="openGlobalSearch()"
+                        onclick="openGlobalSearch()"
+                        autocomplete="off"
+                        aria-label="Pesquisa global"
+                        readonly
+                    >
+                    <span class="topbar-search-shortcut">⌘K</span>
+                </div>
+
+                <div class="top-bar-right" style="display:flex; align-items:center;">
+                    <!-- Search button (mobile / compact) -->
+                    <button class="topbar-search-btn-mobile" id="global-search-btn" onclick="openGlobalSearch()" aria-label="Pesquisar">
+                        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="8"/>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                        </svg>
+                    </button>
+                    <button class="btn btn-primary" style="background-color: #ef4444; border-radius: 20px; padding: 6px 12px; font-weight: bold; font-size: 14px; display: flex; align-items: center; gap: 4px; margin-right: 16px;" onclick="openModal('sos-modal-dialog')">
+                        <span style="font-size: 16px">🚨</span> SOS Pet
+                    </button>
+                    <div class="notification-bell" id="bell-btn">
+                        <svg viewBox="0 0 24 24" class="top-icon"><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.89 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/></svg>
+                        <span class="bell-badge" id="notif-count">2</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Display viewport where dynamic templates render -->
+            <div id="viewport" class="viewport-transition">
+                <!-- Inner screens will be dynamically loaded here by app.js -->
+            </div>
+
+        </main>
+
+        <!-- Bottom Navigation (Mobile Only) -->
+        <nav class="bottom-nav">
+            <button class="bottom-item active" data-tab="feed">
+                <svg viewBox="0 0 24 24" class="bottom-icon"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+                <span>Feed</span>
+            </button>
+            <button class="bottom-item" data-tab="reels">
+                <svg viewBox="0 0 24 24" class="bottom-icon"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8 12.5v-9l6 4.5-6 4.5z"/></svg>
+                <span>Reels</span>
+            </button>
+            <button class="bottom-item" data-tab="friends">
+                <svg viewBox="0 0 24 24" class="bottom-icon"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.53c-.26-.81-1-1.4-1.9-1.4h-1v-3c0-.55-.45-1-1-1h-6v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+                <span>Chat</span>
+            </button>
+            <button class="bottom-item" data-tab="health">
+                <svg viewBox="0 0 24 24" class="bottom-icon"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>
+                <span>Saúde</span>
+            </button>
+            <button class="bottom-item" data-tab="profile">
+                <svg viewBox="0 0 24 24" class="bottom-icon"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                <span>Perfil</span>
+            </button>
+        </nav>
+
+    </div>
+
+    <!-- TOASTS CONTAINER -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <!-- GLOBAL MODALS -->
+
+
+
+    <!-- 2. Modal: Adicionar Pet -->
+    <div class="modal-overlay" id="pet-modal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h2>Adicionar Novo Pet 🐾</h2>
+                <button class="close-modal-btn">&times;</button>
+            </div>
+            <form id="add-pet-form">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="pet-name">Nome:</label>
+                        <input type="text" id="pet-name" class="form-control" required placeholder="Nome do pet">
+                    </div>
+                    <div class="form-group">
+                        <label for="pet-species">Espécie:</label>
+                        <select id="pet-species" class="form-control" required>
+                            <option value="Cachorro">Cachorro 🐶</option>
+                            <option value="Gato">Gato 🐱</option>
+                            <option value="Outro">Outro 🐰</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="pet-breed">Raça:</label>
+                        <input type="text" id="pet-breed" class="form-control" placeholder="Ex: Golden Retriever" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="pet-age">Idade (anos):</label>
+                        <input type="number" id="pet-age" class="form-control" min="0" max="30" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="pet-gender">Sexo:</label>
+                        <select id="pet-gender" class="form-control" required>
+                            <option value="Macho">Macho</option>
+                            <option value="Fêmea">Fêmea</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="pet-weight">Peso Inicial (Kg):</label>
+                        <input type="number" step="0.1" id="pet-weight" class="form-control" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Escolha um Avatar:</label>
+                    <div class="image-preset-picker">
+                        <label class="preset-option">
+                            <input type="radio" name="pet-avatar-choice" value="assets/dog_avatar.png" checked>
+                            <img src="assets/dog_avatar.png" alt="Cachorro">
+                            <span>Golden Smile</span>
+                        </label>
+                        <label class="preset-option">
+                            <input type="radio" name="pet-avatar-choice" value="assets/cat_avatar.png">
+                            <img src="assets/cat_avatar.png" alt="Gato">
+                            <span>Persian Fluff</span>
+                        </label>
+                        <label class="preset-option">
+                            <input type="radio" name="pet-avatar-choice" value="assets/reels_kitten.png">
+                            <img src="assets/reels_kitten.png" alt="Gatinho">
+                            <span>Playful Orange</span>
+                        </label>
+                        <label class="preset-option">
+                            <input type="radio" name="pet-avatar-choice" value="assets/tutor_avatar.png">
+                            <img src="assets/tutor_avatar.png" alt="Foto">
+                            <span>Foto Enviada ✨</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary cancel-modal-btn">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Salvar Pet</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal: Editar Perfil -->
+    <div class="modal-overlay" id="edit-profile-modal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h2>Editar Perfil ✍️</h2>
+                <button class="close-modal-btn">&times;</button>
+            </div>
+            <form id="edit-profile-form">
+                <div class="form-group">
+                    <label for="profile-edit-name">Nome do Tutor:</label>
+                    <input type="text" id="profile-edit-name" class="form-control" required placeholder="Seu nome">
+                </div>
+                <div class="form-group">
+                    <label for="profile-edit-location">Cidade / Estado:</label>
+                    <input type="text" id="profile-edit-location" class="form-control" required placeholder="Ex: São Paulo, SP">
+                </div>
+                <div class="form-group">
+                    <label for="profile-edit-bio">Biografia:</label>
+                    <textarea id="profile-edit-bio" class="form-control" rows="3" required placeholder="Conte algo sobre você e seus pets..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Escolha o seu Avatar de Tutor:</label>
+                    <div class="image-preset-picker">
+                        <label class="preset-option">
+                            <input type="radio" name="profile-avatar-choice" value="assets/tutor_avatar.png" checked>
+                            <img src="assets/tutor_avatar.png" alt="Foto">
+                            <span>Nova Foto ✨</span>
+                        </label>
+                        <label class="preset-option">
+                            <input type="radio" name="profile-avatar-choice" value="assets/dog_avatar.png">
+                            <img src="assets/dog_avatar.png" alt="Cachorro">
+                            <span>Padrão 🐶</span>
+                        </label>
+                        <label class="preset-option">
+                            <input type="radio" name="profile-avatar-choice" value="assets/cat_avatar.png">
+                            <img src="assets/cat_avatar.png" alt="Gato">
+                            <span>Padrão 🐱</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary cancel-modal-btn">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 3. Modal: Registro de Saúde -->
+    <div class="modal-overlay" id="health-modal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h2>Registrar Evento de Saúde 🩺</h2>
+                <button class="close-modal-btn">&times;</button>
+            </div>
+            <form id="health-event-form">
+                <div class="form-group">
+                    <label for="health-pet-select">Selecionar Pet:</label>
+                    <select id="health-pet-select" class="form-control" required></select>
+                </div>
+                <div class="form-group">
+                    <label for="health-type">Tipo de Registro:</label>
+                    <select id="health-type" class="form-control" required>
+                        <option value="vaccine">Vacina 💉</option>
+                        <option value="vermifuge">Vermífugo 💊</option>
+                        <option value="appointment">Consulta Médica / Banho 📅</option>
+                        <option value="weight">Peso / Altura ⚖️</option>
+                    </select>
+                </div>
+                <div class="form-group" id="health-title-group">
+                    <label for="health-title">Título / Nome (ex: Anti-rábica, Banho Geral):</label>
+                    <input type="text" id="health-title" class="form-control" placeholder="Digite o nome ou descrição" required>
+                </div>
+                <div class="form-grid">
+                    <div class="form-group" id="health-value-group" style="display: none;">
+                        <label for="health-value">Valor (Kg / cm):</label>
+                        <input type="number" step="0.1" id="health-value" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="health-date">Data:</label>
+                        <input type="date" id="health-date" class="form-control" required>
+                    </div>
+                    <div class="form-group" id="health-next-date-group">
+                        <label for="health-next-date">Data de Retorno / Próxima Dose:</label>
+                        <input type="date" id="health-next-date" class="form-control">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary cancel-modal-btn">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Registrar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 4. Modal: Formulário de Adoção -->
+    <div class="modal-overlay" id="adoption-modal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h2>Formulário de Interesse em Adoção ❤️</h2>
+                <button class="close-modal-btn">&times;</button>
+            </div>
+            <form id="adopt-form">
+                <input type="hidden" id="adopt-pet-id">
+                <div class="adoption-info-strip">
+                    <img src="" id="adopt-modal-pet-img" class="adopt-strip-img">
+                    <div>
+                        <h3 id="adopt-modal-pet-name">Nome do Pet</h3>
+                        <p id="adopt-modal-pet-meta">ONG Parceira • Porte Médio</p>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="adopt-q1">1. Qual o tipo da sua residência?</label>
+                    <select id="adopt-q1" class="form-control" required>
+                        <option value="Casa com quintal seguro">Casa com quintal seguro</option>
+                        <option value="Apartamento telado">Apartamento telado</option>
+                        <option value="Apartamento sem telas">Apartamento sem telas</option>
+                        <option value="Chácara ou Sítio">Chácara ou Sítio</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="adopt-q2">2. Há outros pets na casa? Se sim, quais?</label>
+                    <input type="text" id="adopt-q2" class="form-control" placeholder="Ex: Um gato idoso e brincalhão, nenhum, etc." required>
+                </div>
+
+                <div class="form-group">
+                    <label for="adopt-q3">3. Quanto tempo o pet passará sozinho por dia?</label>
+                    <select id="adopt-q3" class="form-control" required>
+                        <option value="Menos de 2 horas (Trabalho remoto)">Menos de 2 horas (Trabalho remoto)</option>
+                        <option value="2 a 6 horas">2 a 6 horas</option>
+                        <option value="Mais de 6 horas">Mais de 6 horas</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="adopt-q4">4. Por que você deseja adotar este pet?</label>
+                    <textarea id="adopt-q4" class="form-control" rows="3" placeholder="Fale um pouco sobre sua motivação e estilo de vida..." required></textarea>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary cancel-modal-btn">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Enviar Candidatura</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 5. Modal: Criar Evento -->
+    <div class="modal-overlay" id="event-modal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h2>Criar Evento de Pets 🎉</h2>
+                <button class="close-modal-btn">&times;</button>
+            </div>
+            <form id="create-event-form">
+                <div class="form-group">
+                    <label for="event-title">Nome do Evento:</label>
+                    <input type="text" id="event-title" class="form-control" placeholder="Ex: Encontro de Goldens no Parque" required>
+                </div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="event-date">Data:</label>
+                        <input type="date" id="event-date" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="event-time">Horário:</label>
+                        <input type="time" id="event-time" class="form-control" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="event-location">Local / Endereço:</label>
+                    <input type="text" id="event-location" class="form-control" placeholder="Ex: Parque do Ibirapuera, Portão 6" required>
+                </div>
+                <div class="form-group">
+                    <label for="event-desc">Descrição:</label>
+                    <textarea id="event-desc" class="form-control" rows="3" placeholder="O que os tutores devem levar? Qual a programação?" required></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary cancel-modal-btn">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Criar Evento</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 6. Modal: Criar Tópico no Fórum -->
+    <div class="modal-overlay" id="forum-modal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h2>Novo Tópico de Fórum 💬</h2>
+                <button class="close-modal-btn">&times;</button>
+            </div>
+            <form id="create-forum-form">
+                <div class="form-group">
+                    <label for="forum-category">Categoria:</label>
+                    <select id="forum-category" class="form-control" required>
+                        <option value="Alimentação">Alimentação 🥩</option>
+                        <option value="Comportamento">Comportamento & Adestramento 🧠</option>
+                        <option value="Saúde Animal">Saúde & Cuidados 🩺</option>
+                        <option value="Dicas Gerais">Dicas & Curiosidades ✨</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="forum-title">Título da Pergunta / Dica:</label>
+                    <input type="text" id="forum-title" class="form-control" placeholder="Seja claro na sua dúvida" required>
+                </div>
+                <div class="form-group">
+                    <label for="forum-body">Mensagem:</label>
+                    <textarea id="forum-body" class="form-control" rows="5" placeholder="Forneça detalhes adicionais para que outros tutores possam te ajudar..." required></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary cancel-modal-btn">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Publicar Tópico</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal: Criar Postagem (Instagram Style Split Pane) -->
+    <div class="modal-overlay" id="create-post-modal">
+        <div class="modal-card">
+            <div class="modal-header" style="justify-content: center; position: relative;">
+                <h2 style="font-size: 16px; font-weight: 700;">Criar nova publicação</h2>
+                <button class="close-modal-btn" style="position: absolute; right: 24px; font-size: 24px;">&times;</button>
+            </div>
+            <form id="create-post-form" class="instagram-post-form">
+                <!-- Left Pane: Image Preview / Camera View -->
+                <div class="post-preview-pane" style="position: relative;">
+                    <img id="post-preview-image" src="assets/feed_dog_park.png" alt="Preview da publicação" style="width: 100%; height: 100%; object-fit: cover;">
+                    <video id="post-camera-video" autoplay playsinline style="display: none; width: 100%; height: 100%; object-fit: cover; transform: scaleX(-1);"></video>
+                    <canvas id="post-camera-canvas" style="display: none;"></canvas>
+                    
+                    <!-- Botões de Controle Flutuantes da Câmera -->
+                    <div id="camera-controls" style="display: none; position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%); gap: 12px; z-index: 10;">
+                        <button type="button" id="btn-capture-snapshot" class="btn btn-primary" style="border-radius: 50%; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; font-size: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.3); background-color: var(--success); border-color: var(--success);" title="Tirar Foto">📸</button>
+                        <button type="button" id="btn-cancel-camera" class="btn btn-secondary" style="border-radius: 50%; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; font-size: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.3); background: #ef4444; border-color: #ef4444; color: white;" title="Fechar Câmera">❌</button>
+                    </div>
+                </div>
+                
+                <!-- Right Pane: Details & Form -->
+                <div class="post-details-pane">
+                    <!-- Profile Header -->
+                    <div class="post-profile-header">
+                        <img id="post-profile-avatar" src="assets/dog_avatar.png" alt="Pet Avatar" class="mini-avatar">
+                        <span id="post-profile-name" class="post-profile-name">Carregando...</span>
+                    </div>
+
+                    <!-- Input: Pet Select -->
+                    <div class="form-group">
+                        <label for="post-pet-select">Quem está postando?</label>
+                        <select id="post-pet-select" class="form-control" required>
+                            <!-- Preenchido pelo app.js -->
+                        </select>
+                    </div>
+
+                    <!-- Input: Legend Text -->
+                    <div class="form-group" style="flex: 1; min-height: 100px;">
+                        <label for="post-text">Legenda da foto:</label>
+                        <textarea id="post-text" class="form-control" style="resize: none; flex: 1; min-height: 80px;" placeholder="Escreva uma legenda... O que seu pet está aprontando hoje? 🐾" required></textarea>
+                    </div>
+
+                    <!-- Input: Image Source Selector -->
+                    <div class="form-group" style="margin-bottom: 24px;">
+                        <label style="margin-bottom: 8px; display: block; font-weight: 700;">Imagem da Publicação:</label>
+                        <div style="display: flex; gap: 12px;">
+                            <input type="file" id="post-image-file" accept="image/*" style="opacity: 0; position: absolute; width: 1px; height: 1px; z-index: -1;">
+                            <button type="button" id="btn-choose-gallery" class="btn btn-secondary" style="flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px; font-weight: 700; padding: 12px; border-radius: 8px; background-color: var(--bg-input); border: 1px solid var(--border-color); color: var(--text-main);">
+                                📁 Galeria
+                            </button>
+                            <button type="button" id="btn-use-camera" class="btn btn-secondary" style="flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px; font-weight: 700; padding: 12px; border-radius: 8px; background-color: var(--bg-input); border: 1px solid var(--border-color); color: var(--text-main);">
+                                📷 Câmera
+                            </button>
+                        </div>
+                        <input type="hidden" id="post-image-value" name="post-img-val" value="assets/feed_dog_park.png">
+                        <span id="image-source-indicator" style="display: block; font-size: 12px; color: var(--text-muted); margin-top: 8px;">Imagem atual: Padrão 🌳</span>
+                    </div>
+
+                    <!-- Footer / Submission Buttons -->
+                    <div class="modal-footer" style="margin-top: auto; padding: 12px 0 0 0; border-top: 1px solid var(--border-color);">
+                        <button type="button" class="btn btn-secondary cancel-modal-btn">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Publicar no Feed</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal SOS Pet -->
+    <div class="modal-overlay" id="sos-modal-dialog">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h2>🚨 Emergência SOS Pet</h2>
+                <button class="close-modal-btn">&times;</button>
+            </div>
+            <form id="sos-pet-form">
+                <div class="form-group">
+                    <label for="sos-type">Tipo de Ocorrência:</label>
+                    <select id="sos-type" class="form-control" required>
+                        <option value="">Selecione o problema...</option>
+                        <option value="Animal de Rua">Animal em situação de rua 🐕</option>
+                        <option value="Animal Perdido">Animal Perdido 🔍</option>
+                        <option value="Animal Ferido">Animal Ferido 🩹</option>
+                        <option value="Maus-tratos">Maus-tratos / Resgate Urgente 🚨</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="sos-location">Localização (Endereço aproximado):</label>
+                    <input type="text" id="sos-location" class="form-control" required placeholder="Onde o pet está?">
+                </div>
+                <div class="form-group">
+                    <label for="sos-details">Detalhes (Raça, cor, estado do animal):</label>
+                    <textarea id="sos-details" class="form-control" rows="3" required placeholder="Descreva a situação, raça aproximada, cor e estado do animal..."></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary cancel-modal-btn">Cancelar</button>
+                    <button type="submit" class="btn btn-primary" style="background-color: #ef4444;">Emitir Alerta SOS</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal: Menu de Configurações do Perfil (Estilo Dropdown Instagram) -->
+    <div class="modal-overlay" id="settings-modal" onclick="closeModal(this)">
+        <div class="modal-card instagram-settings-card" onclick="event.stopPropagation()">
+            <div class="instagram-settings-list">
+                <button class="instagram-settings-item" onclick="openSettingsDetailsModal()">
+                    <span class="instagram-settings-icon">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="3"/>
+                            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+                        </svg>
+                    </span>
+                    <span>Configurações</span>
+                </button>
+                <button class="instagram-settings-item" onclick="openSavedActivityModal()">
+                    <span class="instagram-settings-icon">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                        </svg>
+                    </span>
+                    <span>Sua atividade</span>
+                </button>
+                <button class="instagram-settings-item" onclick="openSavedItemsModal()">
+                    <span class="instagram-settings-icon">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
+                        </svg>
+                    </span>
+                    <span>Salvos</span>
+                </button>
+                <button class="instagram-settings-item" onclick="toggleThemeFromSettingsMenu()">
+                    <span class="instagram-settings-icon">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                        </svg>
+                    </span>
+                    <span>Alternar exibição</span>
+                </button>
+                <button class="instagram-settings-item" onclick="openSettingsSubModal('relatar-problema')">
+                    <span class="instagram-settings-icon">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                            <line x1="12" y1="8" x2="12" y2="12"/>
+                            <line x1="12" y1="16" x2="12.01" y2="16"/>
+                        </svg>
+                    </span>
+                    <span>Relatar um problema</span>
+                </button>
+                
+                <div class="instagram-settings-divider"></div>
+                
+                <button class="instagram-settings-item text-only" onclick="closeModal(document.getElementById('settings-modal')); showToast('Recurso de troca de conta mockado!', 'info')">
+                    <span>Trocar de conta</span>
+                </button>
+                <button class="instagram-settings-item text-only danger" onclick="handleLogoutSettings()">
+                    <span>Sair</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Opções de Configurações Detalhadas (Configurações Gerais) -->
+    <div class="modal-overlay" id="settings-details-modal" onclick="closeModal(this)">
+        <div class="modal-card settings-modal-card" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <h2>Configurações</h2>
+                <button class="close-modal-btn" onclick="closeModal(document.getElementById('settings-details-modal'))">&times;</button>
+            </div>
+            <div class="settings-options-list">
+                <button class="settings-option-item" onclick="openSettingsSubModal('alterar-senha')">Alterar senha</button>
+                <button class="settings-option-item" onclick="openSettingsSubModal('codigo-qr')">Código QR</button>
+                <button class="settings-option-item" onclick="openSettingsSubModal('notificacoes')">Notificações</button>
+                <button class="settings-option-item" onclick="openSettingsSubModal('privacidade-seguranca')">Privacidade e segurança</button>
+                <button class="settings-option-item" onclick="openSettingsSubModal('supervisao')">Supervisão</button>
+                <button class="settings-option-item" onclick="openSettingsSubModal('atividade-login')">Atividade de login</button>
+                <button class="settings-option-item" onclick="openSettingsSubModal('relatar-problema')">Relatar um problema</button>
+                <button class="settings-option-item" onclick="closeModal(document.getElementById('settings-details-modal'))">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Itens Salvos (Salvos) -->
+    <div class="modal-overlay" id="settings-saved-modal" onclick="closeModal(this)">
+        <div class="modal-card settings-sub-modal-card" onclick="event.stopPropagation()" style="max-width: 480px; width: 90%;">
+            <div class="modal-header">
+                <h2>Itens Salvos</h2>
+                <button class="close-modal-btn" onclick="closeModal(document.getElementById('settings-saved-modal'))">&times;</button>
+            </div>
+            <div class="saved-items-body" id="settings-saved-list" style="padding: 16px 24px; max-height: 400px; overflow-y: auto;">
+                <!-- Saved items rendered here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Sua atividade (Estilo Instagram) -->
+    <div class="modal-overlay" id="settings-activity-modal" onclick="closeModal(this)">
+        <div class="modal-card instagram-activity-card" onclick="event.stopPropagation()">
+            <!-- Left Sidebar Navigation -->
+            <div class="ig-activity-sidebar">
+                <h2 class="ig-activity-title">Sua atividade</h2>
+                <div class="ig-activity-nav-list">
+                    <button class="ig-activity-nav-item active" onclick="switchActivitySection('interacoes')">
+                        <span class="ig-activity-nav-icon">↔️</span>
+                        <div class="ig-activity-nav-text">
+                            <strong>Interações</strong>
+                            <span>Analise e exclua curtidas, comentários e outras interações.</span>
+                        </div>
+                    </button>
+                    <button class="ig-activity-nav-item" onclick="switchActivitySection('fotos-videos')">
+                        <span class="ig-activity-nav-icon">📷</span>
+                        <div class="ig-activity-nav-text">
+                            <strong>Fotos e vídeos</strong>
+                            <span>Veja, arquive ou exclua as fotos e os vídeos que você compartilhou.</span>
+                        </div>
+                    </button>
+                    <button class="ig-activity-nav-item" onclick="switchActivitySection('historico')">
+                        <span class="ig-activity-nav-icon">📅</span>
+                        <div class="ig-activity-nav-text">
+                            <strong>Histórico da conta</strong>
+                            <span>Verifique as alterações que você fez na sua conta desde que a criou.</span>
+                        </div>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Right Details Area -->
+            <div class="ig-activity-content">
+                <button class="close-modal-btn ig-activity-close" onclick="closeModal(document.getElementById('settings-activity-modal'))">&times;</button>
+                
+                <!-- SECTION: INTERAÇÕES -->
+                <div class="ig-activity-section active" id="ig-activity-section-interacoes">
+                    <!-- Top Sub-Tabs -->
+                    <div class="ig-activity-subtabs">
+                        <span class="ig-activity-subtab active" onclick="switchActivitySubtab('curtidas')">❤️ Curtidas</span>
+                        <span class="ig-activity-subtab" onclick="switchActivitySubtab('comentarios')">💬 Comentários</span>
+                        <span class="ig-activity-subtab" onclick="switchActivitySubtab('respostas')">↩️ Respostas ao Story</span>
+                        <span class="ig-activity-subtab" onclick="switchActivitySubtab('avaliacoes')">🏷️ Avaliações</span>
+                    </div>
+                    
+                    <div class="ig-activity-sorting-row">
+                        <span>De mais recentes a mais antigos</span>
+                        <button class="btn-sorting-filter" onclick="showToast('Filtragem e ordenação ativada!', 'info')">Classificar e filtrar</button>
+                        <a href="#" class="select-link" onclick="showToast('Modo de seleção em lote!', 'info'); return false;">Selecionar</a>
+                    </div>
+                    
+                    <!-- Subtab Panel: CURTIDAS -->
+                    <div class="ig-activity-subpanel active" id="ig-activity-subpanel-curtidas">
+                        <div class="ig-activity-grid" id="ig-activity-likes-grid">
+                            <!-- Liked items grid -->
+                        </div>
+                    </div>
+                    
+                    <!-- Subtab Panel: COMENTÁRIOS -->
+                    <div class="ig-activity-subpanel" id="ig-activity-subpanel-comentarios">
+                        <div class="ig-activity-comments-list" id="ig-activity-comments-list">
+                            <!-- User's comments list -->
+                        </div>
+                    </div>
+                    
+                    <!-- Subtab Panel: RESPOSTAS -->
+                    <div class="ig-activity-subpanel" id="ig-activity-subpanel-respostas">
+                        <p class="empty-text">Nenhuma resposta ao Story enviada recentemente.</p>
+                    </div>
+                    
+                    <!-- Subtab Panel: AVALIAÇÕES -->
+                    <div class="ig-activity-subpanel" id="ig-activity-subpanel-avaliacoes">
+                        <p class="empty-text">Você ainda não avaliou nenhuma instituição parceira.</p>
+                    </div>
+                </div>
+                
+                <!-- SECTION: FOTOS E VÍDEOS -->
+                <div class="ig-activity-section" id="ig-activity-section-fotos-videos">
+                    <h3 class="ig-settings-section-title">Fotos e vídeos</h3>
+                    <p class="ig-settings-section-desc" style="font-size:12px;">Veja e gerencie as publicações e reels que você compartilhou no Conexão Pet.</p>
+                    <div class="ig-activity-grid" id="ig-activity-my-posts-grid">
+                        <!-- User's posts grid -->
+                    </div>
+                </div>
+                
+                <!-- SECTION: HISTÓRICO DA CONTA -->
+                <div class="ig-activity-section" id="ig-activity-section-historico">
+                    <h3 class="ig-settings-section-title">Histórico da conta</h3>
+                    <p class="ig-settings-section-desc" style="font-size:12px;">Alterações que você fez na sua conta desde que ela foi criada.</p>
+                    <div class="ig-activity-history-timeline" id="ig-activity-history-list">
+                        <!-- History logs -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sub-Modal: Alterar Senha -->
+    <div class="modal-overlay" id="settings-password-modal">
+        <div class="modal-card settings-sub-modal-card">
+            <div class="modal-header">
+                <h2>Alterar senha</h2>
+                <button class="close-modal-btn" onclick="closeModal(document.getElementById('settings-password-modal'))">&times;</button>
+            </div>
+            <form id="settings-password-form" onsubmit="event.preventDefault(); changePasswordSettings();">
+                <div class="form-group">
+                    <label for="password-current">Senha atual</label>
+                    <input type="password" id="password-current" class="form-control" placeholder="Senha atual" required>
+                </div>
+                <div class="form-group">
+                    <label for="password-new">Nova senha</label>
+                    <input type="password" id="password-new" class="form-control" placeholder="Nova senha" required>
+                </div>
+                <div class="form-group">
+                    <label for="password-confirm">Confirmar nova senha</label>
+                    <input type="password" id="password-confirm" class="form-control" placeholder="Confirmar nova senha" required>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal(document.getElementById('settings-password-modal'))">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Alterar senha</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Sub-Modal: Código QR -->
+    <div class="modal-overlay" id="settings-qr-modal">
+        <div class="modal-card settings-sub-modal-card qr-card-wrap">
+            <div class="modal-header" style="border-bottom: none;">
+                <h2>Código QR</h2>
+                <button class="close-modal-btn" onclick="closeModal(document.getElementById('settings-qr-modal'))">&times;</button>
+            </div>
+            <div class="qr-content-area">
+                <div class="qr-gradient-card">
+                    <div class="qr-logo-brand">🐾 Conexão Pet</div>
+                    <div class="qr-code-svg-wrap">
+                        <svg viewBox="0 0 100 100" class="qr-code-svg">
+                            <path d="M5 5h30v30H5zm6 6h18v18H11zm6 6h6v6h-6zm54-12h30v30H65zm6 6h18v18H71zm6 6h6v6h-6zM5 65h30v30H5zm6 6h18v18H11zm6 6h6v6h-6zm59-11h6v6h-6zm6-6h6v6h-6zm6 6h6v6h-6zm-6 6h6v6h-6zm12-12h6v6h-6zm0 12h6v6h-6zm-18 6h6v6h-6zm6 6h6v6h-6zm12 0h6v6h-6zm0-12h6v6h-6zm-12-6h6v6h-6zm6-6h6v6h-6zm-12 18h6v6h-6zm18 0h6v6h-6z" fill="currentColor"/>
+                            <rect x="42" y="42" width="16" height="16" rx="4" fill="currentColor"/>
+                            <circle cx="50" cy="50" r="3" fill="var(--bg-card)"/>
+                        </svg>
+                    </div>
+                    <div class="qr-username-label" id="qr-username-label">@carloshenrique</div>
+                </div>
+                <div style="padding: 24px; text-align: center;">
+                    <p style="font-size: 13.5px; color: var(--text-muted); margin-bottom: 20px;">Deixe que seus amigos escaneiem este código para encontrar seu perfil instantaneamente.</p>
+                    <button class="btn btn-primary" style="width: 100%;" onclick="showToast('Código copiado para a área de transferência!', 'success')">Copiar link do perfil</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sub-Modal: Notificações -->
+    <div class="modal-overlay" id="settings-notifications-modal">
+        <div class="modal-card settings-sub-modal-card">
+            <div class="modal-header">
+                <h2>Notificações</h2>
+                <button class="close-modal-btn" onclick="closeModal(document.getElementById('settings-notifications-modal'))">&times;</button>
+            </div>
+            <div class="settings-options-list">
+                <div class="settings-option-item-toggle">
+                    <span>Curtidas</span>
+                    <label class="switch">
+                        <input type="checkbox" id="notify-likes" checked>
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+                <div class="settings-option-item-toggle">
+                    <span>Comentários</span>
+                    <label class="switch">
+                        <input type="checkbox" id="notify-comments" checked>
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+                <div class="settings-option-item-toggle">
+                    <span>Mensagens no chat</span>
+                    <label class="switch">
+                        <input type="checkbox" id="notify-messages" checked>
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+                <div class="settings-option-item-toggle">
+                    <span>Alertas SOS de Emergência</span>
+                    <label class="switch">
+                        <input type="checkbox" id="notify-sos" checked>
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+                <div class="modal-footer" style="padding: 16px 24px; margin-top: 0; border-top: 1px solid var(--border-color);">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal(document.getElementById('settings-notifications-modal'))">Cancelar</button>
+                    <button type="button" class="btn btn-primary" onclick="saveNotificationPreferences()">Salvar preferências</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sub-Modal: Privacidade e segurança -->
+    <div class="modal-overlay" id="settings-privacy-modal">
+        <div class="modal-card settings-sub-modal-card">
+            <div class="modal-header">
+                <h2>Privacidade e segurança</h2>
+                <button class="close-modal-btn" onclick="closeModal(document.getElementById('settings-privacy-modal'))">&times;</button>
+            </div>
+            <div class="settings-options-list">
+                <div class="settings-option-item-toggle" style="flex-direction: column; align-items: flex-start; gap: 8px;">
+                    <div style="display: flex; justify-content: space-between; width: 100%; align-items: center;">
+                        <span style="font-weight: 700;">Conta privada</span>
+                        <label class="switch">
+                            <input type="checkbox" id="privacy-private-account">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                    <p style="font-size: 11.5px; color: var(--text-muted); line-height: 1.4; margin: 0;">Quando sua conta é privada, apenas as pessoas que você aprova podem ver suas fotos, vídeos e lista de pets.</p>
+                </div>
+                <div class="settings-option-item-toggle" style="flex-direction: column; align-items: flex-start; gap: 8px;">
+                    <div style="display: flex; justify-content: space-between; width: 100%; align-items: center;">
+                        <span style="font-weight: 700;">Mostrar status de atividade</span>
+                        <label class="switch">
+                            <input type="checkbox" id="privacy-activity-status" checked>
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                    <p style="font-size: 11.5px; color: var(--text-muted); line-height: 1.4; margin: 0;">Permite que os perfis que você segue e qualquer pessoa para quem você enviar mensagens vejam quando você esteve online pela última vez.</p>
+                </div>
+                <!-- Adding Modo Escuro inside Privacy & Security for convenient toggle too -->
+                <div class="settings-option-item-toggle" style="flex-direction: column; align-items: flex-start; gap: 8px;">
+                    <div style="display: flex; justify-content: space-between; width: 100%; align-items: center;">
+                        <span style="font-weight: 700;">Modo escuro</span>
+                        <label class="switch">
+                            <input type="checkbox" id="settings-toggle-theme" onchange="toggleThemeFromSettings(this.checked)">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                    <p style="font-size: 11.5px; color: var(--text-muted); line-height: 1.4; margin: 0;">Alterna entre o visual claro e escuro em todo o aplicativo.</p>
+                </div>
+                <!-- Adding Reset database inside Privacy & Security as a developer/user security action -->
+                <button class="settings-option-item danger" style="padding: 16px 24px; border-bottom: none;" onclick="closeModal(document.getElementById('settings-privacy-modal')); resetAppDatabase();">
+                    <span>⚠️ Resetar Dados do App (Limpar Banco de Dados)</span>
+                    <span class="settings-arrow">›</span>
+                </button>
+                <div class="modal-footer" style="padding: 16px 24px; margin-top: 0; border-top: 1px solid var(--border-color);">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal(document.getElementById('settings-privacy-modal'))">Cancelar</button>
+                    <button type="button" class="btn btn-primary" onclick="savePrivacyPreferences()">Salvar alterações</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sub-Modal: Supervisão -->
+    <div class="modal-overlay" id="settings-supervision-modal">
+        <div class="modal-card settings-sub-modal-card">
+            <div class="modal-header">
+                <h2>Supervisão</h2>
+                <button class="close-modal-btn" onclick="closeModal(document.getElementById('settings-supervision-modal'))">&times;</button>
+            </div>
+            <div style="padding: 24px; text-align: center;">
+                <div style="font-size: 40px; margin-bottom: 16px;">👥</div>
+                <h3 style="font-size: 16px; margin-bottom: 8px;">Supervisão Familiar</h3>
+                <p style="font-size: 13px; color: var(--text-muted); line-height: 1.5; margin-bottom: 24px;">A supervisão ajuda pais e responsáveis a apoiar a experiência dos adolescentes no Conexão Pet. Vincule uma conta para iniciar.</p>
+                <button class="btn btn-primary" style="width: 100%; margin-bottom: 12px;" onclick="showToast('Recurso em desenvolvimento!', 'info')">Criar convite de supervisão</button>
+                <button class="btn btn-secondary" style="width: 100%;" onclick="closeModal(document.getElementById('settings-supervision-modal'))">Voltar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sub-Modal: Atividade de login -->
+    <div class="modal-overlay" id="settings-login-activity-modal">
+        <div class="modal-card settings-sub-modal-card">
+            <div class="modal-header">
+                <h2>Atividade de login</h2>
+                <button class="close-modal-btn" onclick="closeModal(document.getElementById('settings-login-activity-modal'))">&times;</button>
+            </div>
+            <div style="padding: 16px 0;">
+                <p style="padding: 0 24px 12px; font-size: 13px; color: var(--text-muted);">Dispositivos conectados à sua conta:</p>
+                <div class="settings-options-list">
+                    <div style="display: flex; gap: 16px; padding: 16px 24px; align-items: center; border-bottom: 1px solid var(--border-color);">
+                        <span style="font-size: 24px;">💻</span>
+                        <div style="flex: 1;">
+                            <h4 style="margin: 0; font-size: 14px; font-weight: 700;">São Paulo, Brasil</h4>
+                            <p style="margin: 4px 0 0; font-size: 12px; color: var(--text-muted);">Este dispositivo (Windows Chrome) • Ativo agora</p>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 16px; padding: 16px 24px; align-items: center; border-bottom: 1px solid var(--border-color);">
+                        <span style="font-size: 24px;">📱</span>
+                        <div style="flex: 1;">
+                            <h4 style="margin: 0; font-size: 14px; font-weight: 700;">São Paulo, Brasil</h4>
+                            <p style="margin: 4px 0 0; font-size: 12px; color: var(--text-muted);">Apple iPhone 14 • Há 2 horas</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer" style="padding: 16px 24px 8px; border-top: none;">
+                    <button class="btn btn-secondary" style="width: 100%;" onclick="closeModal(document.getElementById('settings-login-activity-modal'))">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sub-Modal: Relatar um problema -->
+    <div class="modal-overlay" id="settings-report-modal">
+        <div class="modal-card settings-sub-modal-card">
+            <div class="modal-header">
+                <h2>Relatar um problema</h2>
+                <button class="close-modal-btn" onclick="closeModal(document.getElementById('settings-report-modal'))">&times;</button>
+            </div>
+            <form id="settings-report-form" onsubmit="event.preventDefault(); submitSettingsProblem();">
+                <div class="form-group">
+                    <label for="report-problem-details">Descreva brevemente o que aconteceu</label>
+                    <textarea id="report-problem-details" class="form-control" rows="4" placeholder="O que não está funcionando? Se possível, descreva como reproduzir o erro." required></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal(document.getElementById('settings-report-modal'))">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Enviar relatório</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- TikTok Bottom Comments Drawer -->
+    <div class="tiktok-drawer-overlay" id="tiktok-comments-drawer" onclick="closeTikTokComments(event)">
+        <div class="tiktok-drawer-content" onclick="event.stopPropagation()">
+            <div class="tiktok-drawer-header">
+                <span id="tiktok-comments-title">Comentários (0)</span>
+                <button class="tiktok-drawer-close" onclick="closeTikTokComments()">&times;</button>
+            </div>
+            <div class="tiktok-drawer-body" id="tiktok-comments-list">
+                <!-- Comments rendered here -->
+            </div>
+            <div class="tiktok-drawer-footer">
+                <img src="assets/tutor_avatar.png" class="mini-avatar current-user-avatar" alt="User avatar">
+                <form class="tiktok-comment-input-wrap" onsubmit="submitTikTokComment(event)">
+                    <input type="text" id="tiktok-comment-field" placeholder="Adicione um comentário..." autocomplete="off">
+                    <button type="submit" class="tiktok-comment-send-btn">Publicar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- TikTok Share Modal -->
+    <div class="modal-overlay" id="tiktok-share-modal" onclick="closeModal(this)">
+        <div class="modal-card tiktok-share-card" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <h2>Enviar para</h2>
+                <button class="close-modal-btn" onclick="closeModal(document.getElementById('tiktok-share-modal'))">&times;</button>
+            </div>
+            
+            <div class="tiktok-share-friends-row" id="tiktok-share-friends-list">
+                <!-- Friends loaded dynamically -->
+            </div>
+            
+            <div style="border-top: 1px solid var(--border-color); margin: 12px 0;"></div>
+            
+            <div class="tiktok-share-actions-grid">
+                <button class="tiktok-share-action-item" onclick="copyTikTokVideoLink()">
+                    <div class="tiktok-share-action-icon-circle blue">
+                        🔗
+                    </div>
+                    <span>Copiar link</span>
+                </button>
+                <button class="tiktok-share-action-item" onclick="shareToWhatsAppMock()">
+                    <div class="tiktok-share-action-icon-circle green">
+                        💬
+                    </div>
+                    <span>WhatsApp</span>
+                </button>
+                <button class="tiktok-share-action-item" onclick="repostTikTokVideoMock()">
+                    <div class="tiktok-share-action-icon-circle pink">
+                        🔄
+                    </div>
+                    <span>Repostar</span>
+                </button>
+                <button class="tiktok-share-action-item" onclick="saveTikTokVideoToFilesMock()">
+                    <div class="tiktok-share-action-icon-circle yellow">
+                        📥
+                    </div>
+                    <span>Salvar vídeo</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- TikTok Audio Modal -->
+    <div class="modal-overlay" id="tiktok-audio-modal" onclick="closeModal(this)">
+        <div class="modal-card tiktok-audio-card" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <h2>Som original</h2>
+                <button class="close-modal-btn" onclick="closeModal(document.getElementById('tiktok-audio-modal'))">&times;</button>
+            </div>
+            <div class="tiktok-audio-body">
+                <div class="tiktok-audio-track-info">
+                    <div class="tiktok-audio-vinyl-wrap" onclick="toggleAudioVinylPlay()">
+                        <div class="tiktok-audio-vinyl-disk spinning" id="tiktok-audio-modal-vinyl"></div>
+                        <div class="tiktok-audio-vinyl-play" id="tiktok-audio-modal-play-icon">▶️</div>
+                    </div>
+                    <div class="tiktok-audio-text-details">
+                        <h3 id="tiktok-audio-title">Som Original - Gatinha Mel</h3>
+                        <p id="tiktok-audio-creator">Mel (Gatinha)</p>
+                        <span class="tiktok-audio-video-count" id="tiktok-audio-video-count">🎬 24.5k vídeos</span>
+                    </div>
+                </div>
+                
+                <button class="use-sound-btn" onclick="useSoundMock()">
+                    🎵 Usar este som
+                </button>
+                
+                <h4 style="margin: 20px 0 10px; font-size: 13px; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Vídeos populares com este som</h4>
+                <div class="tiktok-audio-videos-grid" id="tiktok-audio-videos-grid">
+                    <!-- Render grid of thumbnails/videos -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- GLOBAL SEARCH OVERLAY -->
+    <div class="global-search-overlay" id="global-search-overlay" onclick="handleSearchOverlayClick(event)" aria-modal="true" role="dialog" aria-label="Pesquisa global">
+        <div class="global-search-box" id="global-search-box">
+            <!-- Search Input Row -->
+            <div class="global-search-input-row">
+                <span class="global-search-lupa">
+                    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"/>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                    </svg>
+                </span>
+                <input
+                    type="text"
+                    id="global-search-field"
+                    class="global-search-field"
+                    placeholder="Pesquisar posts, pets, reels, eventos..."
+                    oninput="handleGlobalSearch(this.value)"
+                    onkeydown="handleSearchKeydown(event)"
+                    autocomplete="off"
+                    spellcheck="false"
+                >
+                <button class="global-search-clear-btn" id="global-search-clear" onclick="clearGlobalSearch()" style="display:none" aria-label="Limpar busca">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                        <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+                    </svg>
+                </button>
+                <kbd class="global-search-esc" onclick="closeGlobalSearch()">Esc</kbd>
+            </div>
+
+            <!-- Results / Quick Access area -->
+            <div class="global-search-body" id="global-search-body">
+                <!-- Filled dynamically by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav class="bottom-nav">
+        <button class="bottom-nav-item bottom-item active" data-tab="feed" onclick="navigateToTab('feed')">
+            <svg viewBox="0 0 24 24" class="nav-icon"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+            <span>Feed</span>
+        </button>
+        <button class="bottom-nav-item bottom-item" data-tab="institutions" onclick="navigateToTab('institutions')">
+            <svg viewBox="0 0 24 24" class="nav-icon"><path d="M12 2L2 22h20L12 2zm0 3.82L17.18 16H6.82L12 5.82zM11 10h2v4h-2v-4zm0 5h2v2h-2v-2z"/></svg>
+            <span>Mapa</span>
+        </button>
+        <button class="bottom-nav-item bottom-item" data-tab="health" onclick="navigateToTab('health')">
+            <svg viewBox="0 0 24 24" class="nav-icon"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>
+            <span>Saúde</span>
+        </button>
+        <button class="bottom-nav-item bottom-item" data-tab="profile" onclick="navigateToTab('profile')">
+            <svg viewBox="0 0 24 24" class="nav-icon"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+            <span>Perfil</span>
+        </button>
+    </nav>
+    
+    <!-- Mobile FAB -->
+    <button class="mobile-fab" onclick="openModal('create-post-modal')">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="#fff"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+    </button>
+
+    <!-- Digital Card Modal -->
+    <div class="modal-overlay" id="digital-card-modal" onclick="closeModalOnOutsideClick(event, 'digital-card-modal')">
+        <div class="modal-content" style="max-width: 400px; background: transparent; box-shadow: none; padding: 0;">
+            <div style="background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.3); font-family: 'Inter', sans-serif;">
+                <!-- Header / Photo -->
+                <div style="background: var(--grad-primary); padding: 30px 20px 60px; text-align: center; color: white; position: relative;">
+                    <button class="modal-close" onclick="closeModal('digital-card-modal')" style="position: absolute; top: 15px; right: 15px; background: rgba(255,255,255,0.2); border: none; width: 32px; height: 32px; border-radius: 50%; color: white; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center;">&times;</button>
+                    <h2 style="font-size: 20px; font-weight: 800; margin: 0; letter-spacing: 1px;">PET ID OFICIAL</h2>
+                    <p style="font-size: 11px; opacity: 0.8; margin-top: 4px; text-transform: uppercase;">Conexão Pet Brasil</p>
+                </div>
+                
+                <!-- Body / Info -->
+                <div style="background: white; padding: 0 24px 30px; margin-top: -45px; position: relative; text-align: center;">
+                    <img src="assets/dog_avatar.png" alt="Pet" style="width: 90px; height: 90px; border-radius: 50%; border: 4px solid white; object-fit: cover; box-shadow: 0 4px 15px rgba(0,0,0,0.1); background: white;">
+                    
+                    <h3 style="font-size: 24px; font-weight: 800; color: #111; margin: 12px 0 4px;">Rex</h3>
+                    <p style="font-size: 13px; color: var(--text-muted); font-weight: 600; margin: 0 0 20px;">Golden Retriever • 3 Anos • Macho</p>
+                    
+                    <div style="background: #f8f9fa; border-radius: 12px; padding: 16px; text-align: left; margin-bottom: 24px;">
+                        <div style="display: flex; flex-direction: column; gap: 12px;">
+                            <div>
+                                <span style="font-size: 10px; text-transform: uppercase; color: #888; font-weight: 800; letter-spacing: 0.5px;">Tutor Responsável</span>
+                                <div style="font-size: 14px; font-weight: 600; color: #333;">Carlos Henrique</div>
+                            </div>
+                            <div>
+                                <span style="font-size: 10px; text-transform: uppercase; color: #888; font-weight: 800; letter-spacing: 0.5px;">Contato de Emergência</span>
+                                <div style="font-size: 14px; font-weight: 600; color: #333;">(11) 99999-9999</div>
+                            </div>
+                            <div>
+                                <span style="font-size: 10px; text-transform: uppercase; color: #888; font-weight: 800; letter-spacing: 0.5px;">Condições Médicas</span>
+                                <div style="font-size: 14px; font-weight: 600; color: #e74c3c;">Nenhuma</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- QR Code Placeholder -->
+                    <div style="display: inline-block; padding: 10px; border: 2px dashed #ddd; border-radius: 12px;">
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://petconect.com/pet/rex" alt="QR Code" style="width: 120px; height: 120px; display: block;">
+                    </div>
+                    <p style="font-size: 11px; color: var(--text-muted); margin-top: 12px; margin-bottom: 0;">Escaneie o QR Code em caso de emergência ou perda do animal.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN APP SCRIPT -->
+    <script src="app.js?v=1.0.5"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then(registration => {
+                        console.log('SW registered: ', registration);
+                    })
+                    .catch(registrationError => {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+            });
+        }
+    </script>
+    <!-- Firebase SDK Setup -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-analytics.js";
+        import { getFirestore } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+        import { getAuth, GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBZ6QhCXFVor4IepiseOAVaEqmgU_QmTWY",
+            authDomain: "petconnect-app-6a8a4.firebaseapp.com",
+            projectId: "petconnect-app-6a8a4",
+            storageBucket: "petconnect-app-6a8a4.firebasestorage.app",
+            messagingSenderId: "1053033219166",
+            appId: "1:1053033219166:web:8e868a23a9258f962260cf",
+            measurementId: "G-GTZLQRJQJB"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        window.db = getFirestore(app);
+        window.auth = getAuth(app);
+        window.firebaseGoogleProvider = new GoogleAuthProvider();
+        window.firebaseSignInWithPopup = signInWithPopup;
+        window.firebaseSignInWithEmailAndPassword = signInWithEmailAndPassword;
+        window.firebaseCreateUserWithEmailAndPassword = createUserWithEmailAndPassword;
+        window.firebaseSignOut = signOut;
+        window.firebaseOnAuthStateChanged = onAuthStateChanged;
+        
+        import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+        window.firebaseDb = getFirestore(app);
+        window.firebaseCollection = collection;
+        window.firebaseAddDoc = addDoc;
+        window.firebaseOnSnapshot = onSnapshot;
+        window.firebaseQuery = query;
+        window.firebaseOrderBy = orderBy;
+        window.firebaseServerTimestamp = serverTimestamp;
+        
+        // Dispara a inicialização do Firebase no app.js se já estiver pronto
+        if (typeof window.initFirebaseListeners === 'function') {
+            window.initFirebaseListeners();
+        }
+    </script>
+</body>
+</html>
