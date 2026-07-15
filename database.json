@@ -1,493 +1,25 @@
 {
   "theme": "light",
   "tutor": {
-    "name": "Carlos Henrique",
-    "location": "Picos, PI",
-    "bio": "Apaixonado por bichinhos. Pai do Rex e da Mel. Apoiador ativo de ONGs de adoção local.",
-    "avatar": "assets/tutor_avatar.png",
-    "friendsCount": 124,
-    "followersCount": 382
+    "name": "Ben Hur Sousa Monteiro",
+    "email": "benhur.s.monteiro@gmail.com",
+    "avatar": "https://lh3.googleusercontent.com/a/ACg8ocLorbpzqGnLM4ia9LRcMYKwZABGILJIbPX-olPI7akdMcLLWl0HLg=s96-c",
+    "bio": "Novo membro do PetConnect!"
   },
-  "pets": [
-    {
-      "id": "pet-ong-1",
-      "name": "Pipoca",
-      "breed": "Vira-lata (SRD)",
-      "avatar": "assets/reels_kitten.png",
-      "age": 1,
-      "weight": 8,
-      "gender": "Fêmea",
-      "species": "Cachorro",
-      "description": "Super dócil e brincalhona. Pronta para encontrar uma família!",
-      "health": {
-        "vaccines": [],
-        "vermifuges": [],
-        "appointments": [],
-        "weightHistory": [
-          {
-            "date": "Jun",
-            "weight": 8
-          }
-        ]
-      }
-    },
-    {
-      "id": "pet-ong-2",
-      "name": "Fumaça",
-      "breed": "Vira-lata (SRD)",
-      "avatar": "assets/cat_avatar.png",
-      "age": 2,
-      "weight": 4.5,
-      "gender": "Macho",
-      "species": "Gato",
-      "description": "Companheiro e preguiçoso. Ama sachê."
-    }
-  ],
-  "feed": [
-    {
-      "id": "post-1782299161224",
-      "authorName": "Mel",
-      "authorAvatar": "assets/cat_avatar.png",
-      "time": "Agora mesmo",
-      "text": "Olha o gatinho aprontando no ConexOlha o gatinho aprontando no Conexao Pet! #Fofo #Gatos",
-      "image": "assets/reels_kitten.png",
-      "likes": 1,
-      "liked": true,
-      "comments": []
-    },
-    {
-      "id": "post-1",
-      "authorName": "Rex (Golden Retriever)",
-      "authorAvatar": "assets/dog_avatar.png",
-      "time": "Há 2 horas",
-      "text": "Hoje o dia no parque foi incrível! Corri atrás de 15 bolinhas e fiz 3 novos amigos. Quem quer passear comigo no próximo fim de semana? 🌳🐾 #Cachorros #GoldenRetriever #PetsDoBrasil",
-      "image": "assets/feed_dog_park.png",
-      "likes": 42,
-      "liked": false,
-      "comments": [
-        {
-          "author": "Luna Boxer",
-          "text": "Eu quero! Adoro correr no parque!"
-        },
-        {
-          "author": "Thor Husky",
-          "text": "Se tiver lama eu vou com certeza! 😂"
-        }
-      ]
-    },
-    {
-      "id": "post-2",
-      "authorName": "Mel (Persa Fluffy)",
-      "authorAvatar": "assets/cat_avatar.png",
-      "time": "Há 5 horas",
-      "text": "Julgando os humanos silenciosamente do topo da geladeira... É meu esporte favorito do dia. ✨👑 #Gatos #GatosPersas #VidaDeGato",
-      "image": "assets/cat_avatar.png",
-      "likes": 89,
-      "liked": true,
-      "comments": [
-        {
-          "author": "Carlos Henrique",
-          "text": "Mel, desce daí por favor! kkk"
-        }
-      ]
-    },
-    {
-      "id": "post-mock-3",
-      "authorName": "Luna Boxer",
-      "authorAvatar": "assets/dog_avatar.png",
-      "time": "Há 1 dia",
-      "text": "Minha cara quando ouço barulho de sacola de petisco abrindo... Quem mais é assim? 🐶😂 #FomePet #Comilão #BoxerLove",
-      "image": "assets/dog_avatar.png",
-      "likes": 120,
-      "liked": false,
-      "comments": []
-    },
-    {
-      "id": "post-mock-4",
-      "authorName": "Thor Husky",
-      "authorAvatar": "assets/reels_kitten.png",
-      "time": "Há 2 dias",
-      "text": "Cantando a música do meu povo às 3 da manhã para garantir que todos estão seguros. De nada, humanos! 🐺🎤 #HuskySiberiano #DramaQueen",
-      "image": "assets/reels_kitten.png",
-      "likes": 310,
-      "liked": true,
-      "comments": [
-        {
-          "author": "Mel (Persa Fluffy)",
-          "text": "Chato demais! Quero dormir! 😾"
-        }
-      ]
-    },
-    {
-      "id": "post-mock-5",
-      "authorName": "Pipoca Poodle",
-      "authorAvatar": "assets/dog_avatar.png",
-      "time": "Há 3 dias",
-      "text": "Pronta para o passeio de domingo com meu lacinho novo! Sou a princesa ou não sou? 🎀🐩 #PoodleToy #LookDoDia #PetFofura",
-      "image": "assets/feed_dog_park.png",
-      "likes": 95,
-      "liked": false,
-      "comments": []
-    },
-    {
-      "id": "post-mock-6",
-      "authorName": "Bidu Schnauzer",
-      "authorAvatar": "assets/cat_avatar.png",
-      "time": "Há 4 dias",
-      "text": "Só de olho nessa conversa de vocês sobre dieta... Onde assino para ter mais sachê? 🐾🍗 #SchnauzerBrasil #PetShop #VidaSaudavel",
-      "image": "assets/cat_avatar.png",
-      "likes": 154,
-      "liked": false,
-      "comments": []
-    }
-  ],
-  "reels": [
-    {
-      "id": "reel-1",
-      "authorName": "Mel (Gatinha)",
-      "authorAvatar": "assets/cat_avatar.png",
-      "desc": "Tentando pegar o reflexo da bolinha de sabão no ar! Quase consegui! 😂🫧 #Filhotes #ReelsDoGato #Fofura",
-      "image": "assets/reels_kitten.png",
-      "likes": 244,
-      "liked": true,
-      "music": "Cat Lounge Chill Beats",
-      "challenge": "Desafio da Garrinha 🐾",
-      "saved": false,
-      "comments": [
-        {
-          "author": "Thor Husky",
-          "text": "Que fofa! 😻 Quase conseguiu!"
-        },
-        {
-          "author": "Luna Boxer",
-          "text": "Amei o pulo! Muito ágil e engraçada!"
-        },
-        {
-          "author": "Bidu Schnauzer",
-          "text": "A minha gata faz exatamente igual kkk"
-        }
-      ]
-    },
-    {
-      "id": "reel-2",
-      "authorName": "Rex (Golden)",
-      "authorAvatar": "assets/dog_avatar.png",
-      "desc": "Quando escuto a palavra PASSEAR em 5 línguas diferentes! 🐶✈️ #Cachorros #GoldenSmile #Engraçado",
-      "image": "assets/dog_avatar.png",
-      "likes": 511,
-      "liked": false,
-      "music": "Happy Dogs Walk Theme",
-      "challenge": "Olhar de Coitado 🥺",
-      "saved": false,
-      "comments": [
-        {
-          "author": "Mariana Silva",
-          "text": "O Billy faz a mesma cara kkkk"
-        },
-        {
-          "author": "Thor Husky",
-          "text": "Golden sendo Golden, muito fofo!"
-        },
-        {
-          "author": "Mel Gatinha",
-          "text": "Esse olhar destrói qualquer coração 🥺"
-        }
-      ]
-    }
-  ],
-  "activeReelIndex": 1,
-  "friends": [
-    {
-      "id": "f-1",
-      "name": "Thor (Husky)",
-      "avatar": "assets/reels_kitten.png",
-      "distance": "500m",
-      "online": true,
-      "messages": [
-        {
-          "sender": "received",
-          "text": "Oi! Sou o Thor (Husky). Vamos bater um papo de pet? 🐾",
-          "time": "Ontem"
-        }
-      ]
-    },
-    {
-      "id": "f-2",
-      "name": "Luna (Boxer)",
-      "avatar": "assets/dog_avatar.png",
-      "distance": "1.2km",
-      "online": true,
-      "messages": [
-        {
-          "sender": "received",
-          "text": "Oi! Sou o Luna (Boxer). Vamos bater um papo de pet? 🐾",
-          "time": "Ontem"
-        }
-      ]
-    },
-    {
-      "id": "f-3",
-      "name": "Bidu (Schnauzer)",
-      "avatar": "assets/cat_avatar.png",
-      "distance": "2.0km",
-      "online": false,
-      "messages": [
-        {
-          "sender": "received",
-          "text": "Oi! Sou o Bidu (Schnauzer). Vamos bater um papo de pet? 🐾",
-          "time": "Ontem"
-        },
-        {
-          "sender": "sent",
-          "text": "jkbckjhgkugb",
-          "time": "Agora"
-        },
-        {
-          "sender": "received",
-          "text": "Miau! Que legal falar com você!",
-          "time": "Agora"
-        },
-        {
-          "sender": "sent",
-          "text": "oi tudo bem?",
-          "time": "07:42"
-        },
-        {
-          "sender": "received",
-          "text": "Estou pronto para fazer novas travessuras!",
-          "time": "07:42"
-        },
-        {
-          "sender": "sent",
-          "text": "onde vamos fazer",
-          "time": "07:42"
-        },
-        {
-          "sender": "received",
-          "text": "Miau! Que legal falar com você!",
-          "time": "07:42"
-        }
-      ]
-    },
-    {
-      "id": "f-4",
-      "name": "Pipoca (Poodle)",
-      "avatar": "assets/reels_kitten.png",
-      "distance": "3.4km",
-      "online": true,
-      "messages": [
-        {
-          "sender": "received",
-          "text": "Oi! Sou o Pipoca (Poodle). Vamos bater um papo de pet? 🐾",
-          "time": "Ontem"
-        }
-      ]
-    }
-  ],
-  "activeChatFriendId": "f-1",
-  "forum": [
-    {
-      "id": "th-1",
-      "category": "Alimentação",
-      "title": "Qual a melhor ração para filhotes de Golden?",
-      "author": "Mariana Silva",
-      "body": "Estou com o Billy faz 1 semana e ele está recusando a ração seca. Alguma dica de marca ou sachê saudável?",
-      "replies": [
-        {
-          "author": "Carlos Henrique",
-          "text": "Eu uso a Royal Canin Golden Puppy para o Rex. No começo misturava com um pouquinho de água morna para amolecer, ajudou muito!"
-        },
-        {
-          "author": "Dr. Roberto Vet",
-          "text": "Importante avaliar se não é dentição nascendo. Oferecer rações super premium e, se necessário, pastinhas específicas estimula bastante."
-        }
-      ]
-    },
-    {
-      "id": "th-2",
-      "category": "Comportamento",
-      "title": "Como ensinar o cão a fazer xixi no tapete higiênico?",
-      "author": "Marcos Oliveira",
-      "body": "Minha cachorrinha de 3 meses insiste em fazer xixi no tapete da sala. Já tentei sprays atrativos e não funciona.",
-      "replies": [
-        {
-          "author": "Ana Souza",
-          "text": "Limpe o tapete da sala com eliminador de odor enzimático. Se ficar o cheiro, ela vai voltar lá. E recompense com petisco na mesma hora que ela fizer no tapete higiênico!"
-        }
-      ]
-    },
-    {
-      "id": "th-3",
-      "category": "Saúde Animal",
-      "title": "Dúvida sobre vacina de gripe anual",
-      "author": "Juliana Pires",
-      "body": "É realmente obrigatório dar a vacina da gripe todo ano? Meu pet quase não sai de casa, só passeia no condomínio.",
-      "replies": []
-    }
-  ],
+  "pets": [],
+  "feed": [],
+  "reels": [],
+  "activeReelIndex": 0,
+  "friends": [],
+  "activeChatFriendId": null,
+  "forum": [],
   "activeForumCategory": "Todos",
-  "adoptionPets": [
-    {
-      "id": "adopt-1",
-      "name": "Toby",
-      "species": "Cachorro",
-      "breed": "SRD (Sem Raça Definida)",
-      "age": "1 ano",
-      "size": "Porte Médio",
-      "health": "Vacinado, Vermifugado e Castrado",
-      "personality": "Extremamente brincalhão, companheiro e se dá muito bem com outros cães.",
-      "image": "assets/dog_avatar.png",
-      "ngo": "ONG Patas Solidárias (Verificada)",
-      "status": "Em Adoção (Reservado)"
-    },
-    {
-      "id": "adopt-2",
-      "name": "Pipoca",
-      "species": "Gato",
-      "breed": "Siamês Mix",
-      "age": "5 meses",
-      "size": "Porte Pequeno",
-      "health": "Primeira dose vacinal aplicada, vermifugado",
-      "personality": "Adora carinho na barriguinha e dormir no colo enquanto você assiste TV.",
-      "image": "assets/reels_kitten.png",
-      "ngo": "Gatos do Bem (Verificada)",
-      "status": "Disponível"
-    },
-    {
-      "id": "adopt-3",
-      "name": "Melinda",
-      "species": "Outro",
-      "breed": "Mini Coelho",
-      "age": "8 meses",
-      "size": "Porte Pequeno",
-      "health": "Consultada e saudável",
-      "personality": "Silenciosa, ativa no entardecer, acostumada a comer feno e vegetais frescos.",
-      "image": "assets/cat_avatar.png",
-      "ngo": "Amigos do Reino Animal",
-      "status": "Disponível"
-    }
-  ],
-  "adoptionApplications": [
-    {
-      "id": "app-1782297904090",
-      "petId": "adopt-1",
-      "petName": "Toby",
-      "ngo": "ONG Patas Solidárias (Verificada)",
-      "status": "Em análise pelas ONGs"
-    }
-  ],
+  "adoptionPets": [],
+  "adoptionApplications": [],
   "activeAdoptionFilter": "Todos",
-  "events": [
-    {
-      "id": "ev-1",
-      "title": "Grande Cãominhada & Encontro de Raças",
-      "date": "2026-06-14",
-      "time": "09:00",
-      "location": "Parque Villa-Lobos (Área Pet)",
-      "desc": "Encontro comunitário para caminhar, socializar os pets e trocar dicas sobre adestramento. Leve água e saquinhos higiênicos!",
-      "rsvps": 34,
-      "userJoined": false
-    },
-    {
-      "id": "ev-2",
-      "title": "Feira de Adoção Adote um Amor 🐱🐶",
-      "date": "2026-06-20",
-      "time": "10:00",
-      "location": "Praça Benedito Calixto, Pinheiros",
-      "desc": "Mais de 40 animais resgatados pelas ONGs parceiras do Conexão Pet estarão em busca de um lar responsável. Venha conhecer seu novo amigo!",
-      "rsvps": 17,
-      "userJoined": false
-    }
-  ],
+  "events": [],
   "activeTab": "landing",
-  "mobileChatActive": false,
-  "reports": [
-    {
-      "id": "rep-1",
-      "type": "Perfil Falso",
-      "target": "Usuário \"RexTheDog99\"",
-      "details": "Uso de fotos de pet alheias sem autorização.",
-      "status": "Em Análise",
-      "createdAt": "2026-06-16"
-    },
-    {
-      "id": "rep-2",
-      "type": "Maus Serviços",
-      "target": "Instituição \"PetShop X\"",
-      "details": "Negligência flagrante durante banho e tosa.",
-      "status": "Resolvido",
-      "createdAt": "2026-06-15"
-    },
-    {
-      "id": "rep-3",
-      "type": "Animal Perdido",
-      "target": "Av. Paulista, próximo ao MASP",
-      "details": "Cachorro sem coleira parecendo desorientado e assustado.",
-      "status": "Busca Ativa",
-      "createdAt": "2026-06-17"
-    }
-  ],
-  "activeReelsTab": "seguindo",
-  "followedCreators": [
-    "Mel (Gatinha)",
-    "Rex (Golden)"
-  ],
-  "stories": [
-    {
-      "id": "story-rex",
-      "authorName": "Rex",
-      "authorAvatar": "assets/dog_avatar.png",
-      "image": "assets/feed_dog_park.png",
-      "viewed": true,
-      "friendId": "f-2"
-    },
-    {
-      "id": "story-mel",
-      "authorName": "Mel",
-      "authorAvatar": "assets/cat_avatar.png",
-      "image": "assets/cat_avatar.png",
-      "viewed": true
-    },
-    {
-      "id": "story-thor",
-      "authorName": "Thor Boxer",
-      "authorAvatar": "assets/reels_kitten.png",
-      "image": "assets/reels_kitten.png",
-      "viewed": true,
-      "friendId": "f-1"
-    },
-    {
-      "id": "story-bidu",
-      "authorName": "Bidu",
-      "authorAvatar": "assets/cat_avatar.png",
-      "image": "assets/cat_avatar.png",
-      "viewed": true,
-      "friendId": "f-3"
-    }
-  ],
-  "reelsSearchQuery": "",
-  "accountHistory": [
-    {
-      "title": "Conta Criada",
-      "desc": "Sua conta @carloshenrique foi criada no Conexão Pet.",
-      "time": "10 de Junho de 2026"
-    },
-    {
-      "title": "Primeiro Pet Cadastrado",
-      "desc": "Você cadastrou o pet Rex (Golden Retriever).",
-      "time": "11 de Junho de 2026"
-    },
-    {
-      "title": "Segundo Pet Cadastrado",
-      "desc": "Você cadastrou o pet Mel (Persa).",
-      "time": "12 de Junho de 2026"
-    },
-    {
-      "title": "Entrou no Modo Escuro",
-      "desc": "Você ativou a exibição em Modo Escuro.",
-      "time": "Hoje"
-    }
-  ],
+  "reports": [],
   "users": [
     {
       "email": "carlos@petconect.com",
@@ -498,43 +30,10 @@
         "bio": "Apaixonado por bichinhos. Pai do Rex e da Mel. Apoiador ativo de ONGs de adoção local.",
         "avatar": "assets/tutor_avatar.png",
         "friendsCount": 124,
-        "followersCount": 382
+        "followersCount": 382,
+        "type": "tutor"
       },
-      "pets": [
-        {
-          "id": "pet-ong-1",
-          "name": "Pipoca",
-          "breed": "Vira-lata (SRD)",
-          "avatar": "assets/reels_kitten.png",
-          "age": 1,
-          "weight": 8,
-          "gender": "Fêmea",
-          "species": "Cachorro",
-          "description": "Super dócil e brincalhona. Pronta para encontrar uma família!",
-          "health": {
-            "vaccines": [],
-            "vermifuges": [],
-            "appointments": [],
-            "weightHistory": [
-              {
-                "date": "Jun",
-                "weight": 8
-              }
-            ]
-          }
-        },
-        {
-          "id": "pet-ong-2",
-          "name": "Fumaça",
-          "breed": "Vira-lata (SRD)",
-          "avatar": "assets/cat_avatar.png",
-          "age": 2,
-          "weight": 4.5,
-          "gender": "Macho",
-          "species": "Gato",
-          "description": "Companheiro e preguiçoso. Ama sachê."
-        }
-      ]
+      "pets": []
     },
     {
       "email": "apapi@petconect.com",
@@ -552,7 +51,6 @@
       },
       "pets": [
         {
-          "id": "pet-ong-1",
           "name": "Pipoca",
           "breed": "Vira-lata (SRD)",
           "avatar": "assets/reels_kitten.png",
@@ -560,21 +58,9 @@
           "weight": 8,
           "gender": "Fêmea",
           "species": "Cachorro",
-          "description": "Super dócil e brincalhona. Pronta para encontrar uma família!",
-          "health": {
-            "vaccines": [],
-            "vermifuges": [],
-            "appointments": [],
-            "weightHistory": [
-              {
-                "date": "Jun",
-                "weight": 8
-              }
-            ]
-          }
+          "description": "Super dócil e brincalhona. Pronta para encontrar uma família!"
         },
         {
-          "id": "pet-ong-2",
           "name": "Fumaça",
           "breed": "Vira-lata (SRD)",
           "avatar": "assets/cat_avatar.png",
@@ -593,7 +79,7 @@
         "id": "petshop-patinhas",
         "name": "Pet Shop Patinhas",
         "username": "patinhas_petshop",
-        "location": "São Paulo, SP",
+        "location": "Picos, PI",
         "bio": "Tudo o que seu melhor amigo precisa! Banho & Tosa 🧼, rações premium, medicamentos e muito amor. Venha nos visitar!",
         "avatar": "assets/cat_avatar.png",
         "friendsCount": 512,
@@ -619,7 +105,6 @@
       },
       "pets": [
         {
-          "id": "pet-ps-1",
           "name": "Barthô (Mascote)",
           "breed": "Pug",
           "avatar": "assets/dog_avatar.png",
@@ -631,25 +116,9 @@
       ]
     }
   ],
+  "activeReelsTab": "para-voce",
+  "followedCreators": [],
   "loggedIn": false,
-  "currentUserEmail": null,
   "activePortalTab": "tutor",
-  "activeProfileTab": "adopt",
-  "campaignRaised": 14850,
-  "visitedProfile": null,
-  "ngoReviews": [
-    {
-      "author": "Mariana Silva",
-      "score": 5,
-      "date": "2026-06-25",
-      "text": "Atendimento maravilhoso! Adotei a Mel através da APAPI e o processo foi muito organizado e transparente. Recomendo de olhos fechados!"
-    },
-    {
-      "author": "Carlos Henrique",
-      "score": 5,
-      "date": "2026-06-24",
-      "text": "Excelente prestação de contas. Sempre mostram onde cada centavo das doações é investido. Parabéns pelo trabalho lindo com os cães!"
-    }
-  ],
-  "registerType": "tutor"
+  "currentUserEmail": null
 }

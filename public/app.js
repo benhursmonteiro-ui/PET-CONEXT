@@ -1,3 +1,4 @@
+localStorage.removeItem('conexaopet_state');
 /**
  * Conexão Pet - Core SPA Application Engine
  */
@@ -7,448 +8,36 @@ let state = {
     theme: 'light',
     mobileChatActive: false,
     tutor: {
-        name: 'Carlos Henrique',
-        location: 'Picos, PI',
-        bio: 'Apaixonado por bichinhos. Pai do Rex e da Mel. Apoiador ativo de ONGs de adoção local.',
+        name: 'Usuário',
+        location: '',
+        bio: '',
         avatar: 'assets/tutor_avatar.png',
-        friendsCount: 124,
-        followersCount: 382
+        friendsCount: 0,
+        followersCount: 0
     },
-    pets: [
-        {
-            id: 'pet-1',
-            name: 'Rex',
-            species: 'Cachorro',
-            breed: 'Golden Retriever',
-            age: 3,
-            gender: 'Macho',
-            weight: 32.5,
-            avatar: 'assets/dog_avatar.png',
-            premium: false,
-            health: {
-                vaccines: [
-                    { id: 'v-1', name: 'Anti-rábica', date: '2026-01-10', nextDate: '2027-01-10', status: 'done' },
-                    { id: 'v-2', name: 'V10 Múltipla', date: '2026-03-05', nextDate: '2027-03-05', status: 'done' },
-                    { id: 'v-3', name: 'Gripe Canina', date: '2025-11-12', nextDate: '2026-11-12', status: 'done' }
-                ],
-                vermifuges: [
-                    { id: 'vm-1', name: 'Drontal Plus', date: '2026-04-10', nextDate: '2026-07-10', status: 'done' }
-                ],
-                appointments: [
-                    { id: 'a-1', title: 'Consulta Geral Dr. Ana', date: '2026-06-12', time: '14:00', type: 'appointment' },
-                    { id: 'a-2', title: 'Banho & Tosa PetShop VIP', date: '2026-06-25', time: '09:30', type: 'appointment' }
-                ],
-                weightHistory: [
-                    { date: 'Jan', weight: 29.5 },
-                    { date: 'Fev', weight: 30.2 },
-                    { date: 'Mar', weight: 31.0 },
-                    { date: 'Abr', weight: 31.8 },
-                    { date: 'Mai', weight: 32.5 }
-                ]
-            }
-        },
-        {
-            id: 'pet-2',
-            name: 'Mel',
-            species: 'Gato',
-            breed: 'Persa',
-            age: 2,
-            gender: 'Fêmea',
-            weight: 4.2,
-            avatar: 'assets/cat_avatar.png',
-            premium: true,
-            health: {
-                vaccines: [
-                    { id: 'v-4', name: 'Quádrupla Felina V4', date: '2026-02-15', nextDate: '2027-02-15', status: 'done' },
-                    { id: 'v-5', name: 'Anti-rábica Felina', date: '2026-02-15', nextDate: '2027-02-15', status: 'done' }
-                ],
-                vermifuges: [
-                    { id: 'vm-2', name: 'Milbemax Gato', date: '2026-05-01', nextDate: '2026-11-01', status: 'done' }
-                ],
-                appointments: [
-                    { id: 'a-3', title: 'Checkup Cardiológico', date: '2026-06-18', time: '16:15', type: 'appointment' }
-                ],
-                weightHistory: [
-                    { date: 'Jan', weight: 3.8 },
-                    { date: 'Fev', weight: 3.9 },
-                    { date: 'Mar', weight: 4.0 },
-                    { date: 'Abr', weight: 4.1 },
-                    { date: 'Mai', weight: 4.2 }
-                ]
-            }
-        }
-    ],
-    feed: [
-        {
-            id: 'post-1',
-            authorName: 'Rex (Golden Retriever)',
-            authorAvatar: 'assets/dog_avatar.png',
-            time: 'Há 2 horas',
-            text: 'Hoje o dia no parque foi incrível! Corri atrás de 15 bolinhas e fiz 3 novos amigos. Quem quer passear comigo no próximo fim de semana? 🌳🐾 #Cachorros #GoldenRetriever #PetsDoBrasil',
-            image: 'assets/feed_dog_park.png',
-            likes: 42,
-            liked: false,
-            comments: [
-                { author: 'Luna Boxer', text: 'Eu quero! Adoro correr no parque!' },
-                { author: 'Thor Husky', text: 'Se tiver lama eu vou com certeza! 😂' }
-            ]
-        },
-        {
-            id: 'post-2',
-            authorName: 'Mel (Persa Fluffy)',
-            authorAvatar: 'assets/cat_avatar.png',
-            time: 'Há 5 horas',
-            text: 'Julgando os humanos silenciosamente do topo da geladeira... É meu esporte favorito do dia. ✨👑 #Gatos #GatosPersas #VidaDeGato',
-            image: 'assets/cat_avatar.png',
-            likes: 89,
-            liked: true,
-            comments: [
-                { author: 'Carlos Henrique', text: 'Mel, desce daí por favor! kkk' }
-            ]
-        },
-        {
-            id: 'post-thor-1',
-            authorName: 'Thor Husky',
-            authorAvatar: 'assets/reels_kitten.png',
-            time: 'Há 1 dia',
-            text: 'Achei uma poça de lama espetacular hoje no passeio! Meu tutor quase teve um infarto, mas valeu a pena! 🤪🐾 #Husky #Lama #VidaDeCao',
-            image: 'assets/feed_dog_park.png',
-            likes: 124,
-            liked: false,
-            comments: [
-                { author: 'Carlos Henrique', text: 'Típico de Husky! O Rex teria feito a mesma coisa kkkk' }
-            ]
-        },
-        {
-            id: 'post-luna-1',
-            authorName: 'Luna Boxer',
-            authorAvatar: 'assets/dog_avatar.png',
-            time: 'Há 3 dias',
-            text: 'Pronta para minha soneca da tarde. Vigiar o quintal dá muito trabalho! 😴❤️ #Boxer #Preguica #Instadog',
-            image: 'assets/dog_avatar.png',
-            likes: 98,
-            liked: true,
-            comments: []
-        },
-        {
-            id: 'post-mari-1',
-            authorName: 'Mariana Silva',
-            authorAvatar: 'assets/tutor_avatar.png',
-            time: 'Há 5 dias',
-            text: 'Dica do dia: brinquedos recheáveis congelados ajudam muito na ansiedade de separação de filhotes. O Billy ama! 🦴❄️ #DicasPet #Filhotes',
-            image: 'assets/feed_dog_park.png',
-            likes: 310,
-            liked: false,
-            comments: []
-        }
-    ],
-    reels: [
-        {
-            id: 'reel-1',
-            authorName: 'Mel (Gatinha)',
-            authorAvatar: 'assets/cat_avatar.png',
-            desc: 'Tentando pegar o reflexo da bolinha de sabão no ar! Quase consegui! 😂🫧 #Filhotes #ReelsDoGato #Fofura',
-            image: 'assets/reels_kitten.png',
-            likes: 243,
-            liked: false,
-            saved: false,
-            music: 'Cat Lounge Chill Beats',
-            challenge: 'Desafio da Garrinha 🐾',
-            comments: [
-                { author: 'Thor Husky', text: 'Que fofa! 😻 Quase conseguiu!' },
-                { author: 'Luna Boxer', text: 'Amei o pulo! Muito ágil e engraçada!' },
-                { author: 'Bidu Schnauzer', text: 'A minha gata faz exatamente igual kkk' }
-            ]
-        },
-        {
-            id: 'reel-2',
-            authorName: 'Rex (Golden)',
-            authorAvatar: 'assets/dog_avatar.png',
-            desc: 'Quando escuto a palavra PASSEAR em 5 línguas diferentes! 🐶✈️ #Cachorros #GoldenSmile #Engraçado',
-            image: 'assets/dog_avatar.png',
-            likes: 512,
-            liked: true,
-            saved: false,
-            music: 'Happy Dogs Walk Theme',
-            challenge: 'Olhar de Coitado 🥺',
-            comments: [
-                { author: 'Mariana Silva', text: 'O Billy faz a mesma cara kkkk' },
-                { author: 'Thor Husky', text: 'Golden sendo Golden, muito fofo!' },
-                { author: 'Mel Gatinha', text: 'Esse olhar destrói qualquer coração 🥺' }
-            ]
-        }
-    ],
+    pets: [],
+    feed: [],
+    reels: [],
+    stories: [],
+    reports: [],
     activeReelIndex: 0,
-    friends: [
-        { id: 'f-1', name: 'Thor (Husky)', avatar: 'assets/reels_kitten.png', distance: '500m', online: true, messages: [] },
-        { id: 'f-2', name: 'Luna (Boxer)', avatar: 'assets/dog_avatar.png', distance: '1.2km', online: true, messages: [] },
-        { id: 'f-3', name: 'Bidu (Schnauzer)', avatar: 'assets/cat_avatar.png', distance: '2.0km', online: false, messages: [] },
-        { id: 'f-4', name: 'Pipoca (Poodle)', avatar: 'assets/reels_kitten.png', distance: '3.4km', online: true, messages: [] }
-    ],
-    activeChatFriendId: 'f-1',
-    forum: [
-        {
-            id: 'th-1',
-            category: 'Alimentação',
-            title: 'Qual a melhor ração para filhotes de Golden?',
-            author: 'Mariana Silva',
-            body: 'Estou com o Billy faz 1 semana e ele está recusando a ração seca. Alguma dica de marca ou sachê saudável?',
-            replies: [
-                { author: 'Carlos Henrique', text: 'Eu uso a Royal Canin Golden Puppy para o Rex. No começo misturava com um pouquinho de água morna para amolecer, ajudou muito!' },
-                { author: 'Dr. Roberto Vet', text: 'Importante avaliar se não é dentição nascendo. Oferecer rações super premium e, se necessário, pastinhas específicas estimula bastante.' }
-            ]
-        },
-        {
-            id: 'th-2',
-            category: 'Comportamento',
-            title: 'Como ensinar o cão a fazer xixi no tapete higiênico?',
-            author: 'Marcos Oliveira',
-            body: 'Minha cachorrinha de 3 meses insiste em fazer xixi no tapete da sala. Já tentei sprays atrativos e não funciona.',
-            replies: [
-                { author: 'Ana Souza', text: 'Limpe o tapete da sala com eliminador de odor enzimático. Se ficar o cheiro, ela vai voltar lá. E recompense com petisco na mesma hora que ela fizer no tapete higiênico!' }
-            ]
-        },
-        {
-            id: 'th-3',
-            category: 'Saúde Animal',
-            title: 'Dúvida sobre vacina de gripe anual',
-            author: 'Juliana Pires',
-            body: 'É realmente obrigatório dar a vacina da gripe todo ano? Meu pet quase não sai de casa, só passeia no condomínio.',
-            replies: []
-        }
-    ],
+    friends: [],
+    activeChatFriendId: null,
+    forum: [],
     activeForumCategory: 'Todos',
-    adoptionPets: [
-        {
-            id: 'adopt-1',
-            name: 'Toby',
-            species: 'Cachorro',
-            breed: 'SRD (Sem Raça Definida)',
-            age: '1 ano',
-            size: 'Porte Médio',
-            health: 'Vacinado, Vermifugado e Castrado',
-            personality: 'Extremamente brincalhão, companheiro e se dá muito bem com outros cães.',
-            image: 'assets/dog_avatar.png',
-            ngo: 'ONG Patas Solidárias (Verificada)',
-            status: 'Disponível'
-        },
-        {
-            id: 'adopt-2',
-            name: 'Pipoca',
-            species: 'Gato',
-            breed: 'Siamês Mix',
-            age: '5 meses',
-            size: 'Porte Pequeno',
-            health: 'Primeira dose vacinal aplicada, vermifugado',
-            personality: 'Adora carinho na barriguinha e dormir no colo enquanto você assiste TV.',
-            image: 'assets/reels_kitten.png',
-            ngo: 'Gatos do Bem (Verificada)',
-            status: 'Disponível'
-        },
-        {
-            id: 'adopt-3',
-            name: 'Melinda',
-            species: 'Outro',
-            breed: 'Mini Coelho',
-            age: '8 meses',
-            size: 'Porte Pequeno',
-            health: 'Consultada e saudável',
-            personality: 'Silenciosa, ativa no entardecer, acostumada a comer feno e vegetais frescos.',
-            image: 'assets/cat_avatar.png',
-            ngo: 'Amigos do Reino Animal',
-            status: 'Disponível'
-        }
-    ],
+    adoptionPets: [],
     adoptionApplications: [],
     activeAdoptionFilter: 'Todos',
-    events: [
-        {
-            id: 'ev-1',
-            title: 'Grande Cãominhada & Encontro de Raças',
-            date: '2026-06-14',
-            time: '09:00',
-            location: 'Parque Villa-Lobos (Área Pet)',
-            desc: 'Encontro comunitário para caminhar, socializar os pets e trocar dicas sobre adestramento. Leve água e saquinhos higiênicos!',
-            rsvps: 34,
-            userJoined: false
-        },
-        {
-            id: 'ev-2',
-            title: 'Feira de Adoção Adote um Amor 🐱🐶',
-            date: '2026-06-20',
-            time: '10:00',
-            location: 'Praça Benedito Calixto, Pinheiros',
-            desc: 'Mais de 40 animais resgatados pelas ONGs parceiras do Conexão Pet estarão em busca de um lar responsável. Venha conhecer seu novo amigo!',
-            rsvps: 18,
-            userJoined: true
-        }
-    ],
+    events: [],
     activeTab: 'feed',
     reelsSearchQuery: ''
 };
 
 // Auto-replies mapping for Chat Bot simulation
-const BOT_REPLIES = {
-    'f-1': [
-        "Au au! Tudo bem por aí? Vamos marcar um passeio no parque no próximo final de semana? 🌲🐶",
-        "Que legal sua mensagem! Meu tutor disse que hoje vou ganhar petisco de frango! 🍗",
-        "Estou aqui roendo meu osso de brinquedo... E você, o que está fazendo de bom?"
-    ],
-    'f-2': [
-        "Oi, amigo! Acabei de voltar da tosa, estou super cheirosa! ✨🐶",
-        "Au! Vamos correr atrás dos patos no lago qualquer dia desses? 🦆",
-        "Minha tutora está comendo pizza e eu estou aqui aplicando a técnica do olhar de coitado... Acho que vai dar certo! 🍕🥺"
-    ],
-    'f-4': [
-        "Olá! Estou brincando com uma bolinha que faz barulho aqui, muito divertido! 🎾",
-        "Pipoca na área! Pronto para aprontar muito hoje? 😉🐾",
-        "Acho que vi um passarinho na janela... vou ficar de vigília aqui! 🐦👀"
-    ],
-    'ong-apapi': [
-        "Olá! Recebemos seu alerta de SOS. Nossa equipe de resgate já foi notificada e está avaliando a disponibilidade de voluntários e lar temporário. 💚🐾",
-        "Obrigado por nos informar! Se possível, permaneça no local ou forneça mais detalhes sobre o estado de saúde do animal. A APAPI agradece! 🛡️",
-        "Alerta SOS recebido com sucesso. Estamos divulgando a ocorrência em nossas redes para encontrar ajuda o mais rápido possível!"
-    ],
-    'petshop-patinhas': [
-        "Olá! Vimos o alerta SOS Pet. Caso o animal precise de atendimento veterinário emergencial, nossa clínica está de prontidão com tarifas sociais. 🩺🧼",
-        "Alerta SOS recebido! Se precisar de ração de emergência, medicamentos ou produtos de higiene para o pet resgatado, conte conosco. 💊🐾",
-        "Entendido! Estaremos de olho e prontos para ajudar no que for possível. Pet Shop Patinhas sempre apoiando a causa animal! 💚"
-    ]
-};
+const BOT_REPLIES = {};
 
 // Database array representing Instagram style profiles of users
-const PROFILES = [
-    {
-        id: 'carlos',
-        name: 'Carlos Henrique',
-        username: 'carloshenrique',
-        avatar: 'assets/tutor_avatar.png',
-        bio: 'Apaixonado por bichinhos. Pai do Rex e da Mel. Apoiador ativo de ONGs de adoção local.',
-        location: 'Picos, PI',
-        followersCount: 382,
-        friendsCount: 124,
-        isFollowing: false,
-        isMe: true,
-        pets: [
-            { name: 'Rex', breed: 'Golden Retriever', avatar: 'assets/dog_avatar.png', age: 3, weight: 32.5, gender: 'Macho', species: 'Cachorro' },
-            { name: 'Mel', breed: 'Persa', avatar: 'assets/cat_avatar.png', age: 2, weight: 4.2, gender: 'Fêmea', species: 'Gato' }
-        ]
-    },
-    {
-        id: 'f-1',
-        name: 'Thor Husky',
-        username: 'thor_husky',
-        avatar: 'assets/reels_kitten.png',
-        bio: 'Husky brincalhão que adora lama e correria. 🐾 Corredor profissional de quintal.',
-        location: 'Picos, PI',
-        followersCount: 1420,
-        friendsCount: 231,
-        isFollowing: true,
-        isMe: false,
-        pets: [
-            { name: 'Thor', breed: 'Husky Siberiano', avatar: 'assets/reels_kitten.png', age: 2, weight: 28.0, gender: 'Macho', species: 'Cachorro' }
-        ]
-    },
-    {
-        id: 'f-2',
-        name: 'Luna Boxer',
-        username: 'luna_boxer',
-        avatar: 'assets/dog_avatar.png',
-        bio: 'Boxer super dócil, babona e protetora. Apaixonada por bolinhas de tênis 🎾.',
-        location: 'Campinas, SP',
-        followersCount: 894,
-        friendsCount: 104,
-        isFollowing: true,
-        isMe: false,
-        pets: [
-            { name: 'Luna', breed: 'Boxer', avatar: 'assets/dog_avatar.png', age: 4, weight: 26.5, gender: 'Fêmea', species: 'Cachorro' }
-        ]
-    },
-    {
-        id: 'f-3',
-        name: 'Bidu Schnauzer',
-        username: 'bidu_schnauzer',
-        avatar: 'assets/cat_avatar.png',
-        bio: 'Pequeno no tamanho, gigante no coração. Rabinho que não para de balançar! 🐶',
-        location: 'São Bernardo, SP',
-        followersCount: 512,
-        friendsCount: 88,
-        isFollowing: false,
-        isMe: false,
-        pets: [
-            { name: 'Bidu', breed: 'Schnauzer', avatar: 'assets/cat_avatar.png', age: 5, weight: 8.5, gender: 'Macho', species: 'Cachorro' }
-        ]
-    },
-    {
-        id: 'f-4',
-        name: 'Pipoca Poodle',
-        username: 'pipoca_poodle',
-        avatar: 'assets/reels_kitten.png',
-        bio: 'Branquinha, sapeca e muito dócil. Sou o xodó da casa! 🐩',
-        location: 'Santo André, SP',
-        followersCount: 310,
-        friendsCount: 65,
-        isFollowing: true,
-        isMe: false,
-        pets: [
-            { name: 'Pipoca', breed: 'Poodle', avatar: 'assets/reels_kitten.png', age: 1, weight: 3.5, gender: 'Fêmea', species: 'Cachorro' }
-        ]
-    },
-    {
-        id: 'mariana',
-        name: 'Mariana Silva',
-        username: 'mari_silva',
-        avatar: 'assets/tutor_avatar.png',
-        bio: 'Tutora do Billy 🐶. Compartilho dicas de alimentação saudável e rotina pet.',
-        location: 'Picos, PI',
-        followersCount: 2200,
-        friendsCount: 450,
-        isFollowing: false,
-        isMe: false,
-        type: 'tutor',
-        pets: [
-            { name: 'Billy', breed: 'SRD', avatar: 'assets/dog_avatar.png', age: 1, weight: 12.0, gender: 'Macho', species: 'Cachorro' }
-        ]
-    },
-    {
-        id: 'ong-apapi',
-        name: 'ONG APAPI',
-        username: 'ong_apapi',
-        avatar: 'assets/dog_avatar.png',
-        bio: 'Associação Protetora dos Animais de Piracicaba (APAPI). Resgatamos, tratamos e promovemos a adoção responsável de pets. Junte-se a nós! 💚',
-        location: 'Piracicaba, SP',
-        followersCount: 15430,
-        friendsCount: 124,
-        isFollowing: false,
-        isMe: false,
-        type: 'institution',
-        pets: [
-            { name: 'Pipoca', breed: 'Vira-lata (SRD)', avatar: 'assets/reels_kitten.png', age: 1, weight: 8.0, gender: 'Fêmea', species: 'Cachorro', description: 'Super dócil e brincalhona. Pronta para encontrar uma família!' },
-            { name: 'Fumaça', breed: 'Vira-lata (SRD)', avatar: 'assets/cat_avatar.png', age: 2, weight: 4.5, gender: 'Macho', species: 'Gato', description: 'Companheiro e preguiçoso. Ama sachê.' }
-        ]
-    },
-    {
-        id: 'petshop-patinhas',
-        name: 'Pet Shop Patinhas',
-        username: 'patinhas_petshop',
-        avatar: 'assets/cat_avatar.png',
-        bio: 'Tudo o que seu melhor amigo precisa! Banho & Tosa 🧼, rações premium, medicamentos e muito amor. Venha nos visitar!',
-        location: 'Picos, PI',
-        followersCount: 4210,
-        friendsCount: 512,
-        isFollowing: false,
-        isMe: false,
-        type: 'petshop',
-        services: [
-            { name: 'Banho & Tosa Higiênica', price: 'R$ 80,00', icon: '🧼' },
-            { name: 'Consulta Veterinária', price: 'R$ 120,00', icon: '🩺' },
-            { name: 'Aplicação de Vacinas', price: 'R$ 60,00', icon: '💉' }
-        ],
-        pets: [
-            { name: 'Barthô (Mascote)', breed: 'Pug', avatar: 'assets/dog_avatar.png', age: 3, weight: 8.5, gender: 'Macho', species: 'Cachorro' }
-        ]
-    }
-];
+const PROFILES = [];
 
 function visitUserProfile(profileId) {
     closeGlobalSearch();
@@ -626,66 +215,9 @@ async function initAppState() {
     state.activeReelsTab = state.activeReelsTab || 'para-voce';
     state.followedCreators = state.followedCreators || [];
     
-    // Seed default comments and saved status if missing in existing reels
-    if (state.reels && state.reels.length > 0) {
-        state.reels.forEach(reel => {
-            if (reel.saved === undefined) reel.saved = false;
-            if (!reel.comments || reel.comments.length === 0) {
-                if (reel.id === 'reel-1') {
-                    reel.comments = [
-                        { author: 'Thor Husky', text: 'Que fofa! 😻 Quase conseguiu!' },
-                        { author: 'Luna Boxer', text: 'Amei o pulo! Muito ágil e engraçada!' },
-                        { author: 'Bidu Schnauzer', text: 'A minha gata faz exatamente igual kkk' }
-                    ];
-                } else if (reel.id === 'reel-2') {
-                    reel.comments = [
-                        { author: 'Mariana Silva', text: 'O Billy faz a mesma cara kkkk' },
-                        { author: 'Thor Husky', text: 'Golden sendo Golden, muito fofo!' },
-                        { author: 'Mel Gatinha', text: 'Esse olhar destrói qualquer coração 🥺' }
-                    ];
-                } else {
-                    reel.comments = [];
-                }
-            }
-        });
-    }
     
-    // Seed default stories if empty or undefined
-    if (!state.stories || state.stories.length === 0) {
-        state.stories = [
-            {
-                id: 'story-rex',
-                authorName: 'Rex',
-                authorAvatar: 'assets/dog_avatar.png',
-                image: 'assets/feed_dog_park.png',
-                viewed: false,
-                friendId: 'f-2'
-            },
-            {
-                id: 'story-mel',
-                authorName: 'Mel',
-                authorAvatar: 'assets/cat_avatar.png',
-                image: 'assets/cat_avatar.png',
-                viewed: false
-            },
-            {
-                id: 'story-thor',
-                authorName: 'Thor Boxer',
-                authorAvatar: 'assets/reels_kitten.png',
-                image: 'assets/reels_kitten.png',
-                viewed: true,
-                friendId: 'f-1'
-            },
-            {
-                id: 'story-bidu',
-                authorName: 'Bidu',
-                authorAvatar: 'assets/cat_avatar.png',
-                image: 'assets/cat_avatar.png',
-                viewed: true,
-                friendId: 'f-3'
-            }
-        ];
-    }
+    
+    
 
     // Set Theme Class
     document.body.classList.toggle('dark-mode', state.theme === 'dark');
@@ -700,35 +232,7 @@ async function initAppState() {
         }
     });
 
-    // Seed default reports if empty or undefined
-    if (!state.reports || state.reports.length === 0) {
-        state.reports = [
-            {
-                id: 'rep-1',
-                type: 'Perfil Falso',
-                target: 'Usuário "RexTheDog99"',
-                details: 'Uso de fotos de pet alheias sem autorização.',
-                status: 'Em Análise',
-                createdAt: '2026-06-16'
-            },
-            {
-                id: 'rep-2',
-                type: 'Maus Serviços',
-                target: 'Instituição "PetShop X"',
-                details: 'Negligência flagrante durante banho e tosa.',
-                status: 'Resolvido',
-                createdAt: '2026-06-15'
-            },
-            {
-                id: 'rep-3',
-                type: 'Animal Perdido',
-                target: 'Av. Paulista, próximo ao MASP',
-                details: 'Cachorro sem coleira parecendo desorientado e assustado.',
-                status: 'Busca Ativa',
-                createdAt: '2026-06-17'
-            }
-        ];
-    }
+    
 
     // Garantir postagens suficientes no feed para ver os patrocinadores a cada 5 posts
     if (state.feed && state.feed.length < 6) {
@@ -1635,7 +1139,7 @@ function renderLandingView(container) {
                         <form class="login-form" onsubmit="handlePortalLoginSubmit(event, 'tutor')">
                             <div class="form-group" style="margin-bottom: 16px;">
                                 <label style="display:block; font-size:11.5px; font-weight:800; color:#820ad1; text-transform:uppercase; margin-bottom:6px; letter-spacing: 0.5px;">Email do Tutor</label>
-                                <input type="email" id="portal-tutor-email" value="carlos@petconect.com" required style="width:100%; box-sizing:border-box; padding:12px 0; background:transparent; border:none; border-bottom:1px solid #d3d3d3; color:#111111; font-size:15px; font-family:inherit; outline:none; transition: border-color 0.2s;" onfocus="this.style.borderColor='#820ad1'" onblur="this.style.borderColor='#d3d3d3'">
+                                <input type="email" id="portal-tutor-email" value="" required style="width:100%; box-sizing:border-box; padding:12px 0; background:transparent; border:none; border-bottom:1px solid #d3d3d3; color:#111111; font-size:15px; font-family:inherit; outline:none; transition: border-color 0.2s;" onfocus="this.style.borderColor='#820ad1'" onblur="this.style.borderColor='#d3d3d3'">
                             </div>
                             <div class="form-group" style="margin-bottom: 24px;">
                                 <label style="display:block; font-size:11.5px; font-weight:800; color:#820ad1; text-transform:uppercase; margin-bottom:6px; letter-spacing: 0.5px;">Senha</label>
@@ -1659,7 +1163,7 @@ function renderLandingView(container) {
                         <form class="login-form" onsubmit="handlePortalLoginSubmit(event, 'institution')">
                             <div class="form-group" style="margin-bottom: 16px;">
                                 <label style="display:block; font-size:11.5px; font-weight:800; color:#820ad1; text-transform:uppercase; margin-bottom:6px; letter-spacing: 0.5px;">Email da ONG</label>
-                                <input type="email" id="portal-ong-email" value="apapi@petconect.com" required style="width:100%; box-sizing:border-box; padding:12px 0; background:transparent; border:none; border-bottom:1px solid #d3d3d3; color:#111111; font-size:15px; font-family:inherit; outline:none; transition: border-color 0.2s;" onfocus="this.style.borderColor='#820ad1'" onblur="this.style.borderColor='#d3d3d3'">
+                                <input type="email" id="portal-ong-email" value="" required style="width:100%; box-sizing:border-box; padding:12px 0; background:transparent; border:none; border-bottom:1px solid #d3d3d3; color:#111111; font-size:15px; font-family:inherit; outline:none; transition: border-color 0.2s;" onfocus="this.style.borderColor='#820ad1'" onblur="this.style.borderColor='#d3d3d3'">
                             </div>
                             <div class="form-group" style="margin-bottom: 24px;">
                                 <label style="display:block; font-size:11.5px; font-weight:800; color:#820ad1; text-transform:uppercase; margin-bottom:6px; letter-spacing: 0.5px;">Senha</label>
@@ -1678,7 +1182,7 @@ function renderLandingView(container) {
                         <form class="login-form" onsubmit="handlePortalLoginSubmit(event, 'petshop')">
                             <div class="form-group" style="margin-bottom: 16px;">
                                 <label style="display:block; font-size:11.5px; font-weight:800; color:#820ad1; text-transform:uppercase; margin-bottom:6px; letter-spacing: 0.5px;">Email do Pet Shop</label>
-                                <input type="email" id="portal-petshop-email" value="patinhas@petconect.com" required style="width:100%; box-sizing:border-box; padding:12px 0; background:transparent; border:none; border-bottom:1px solid #d3d3d3; color:#111111; font-size:15px; font-family:inherit; outline:none; transition: border-color 0.2s;" onfocus="this.style.borderColor='#820ad1'" onblur="this.style.borderColor='#d3d3d3'">
+                                <input type="email" id="portal-petshop-email" value="" required style="width:100%; box-sizing:border-box; padding:12px 0; background:transparent; border:none; border-bottom:1px solid #d3d3d3; color:#111111; font-size:15px; font-family:inherit; outline:none; transition: border-color 0.2s;" onfocus="this.style.borderColor='#820ad1'" onblur="this.style.borderColor='#d3d3d3'">
                             </div>
                             <div class="form-group" style="margin-bottom: 24px;">
                                 <label style="display:block; font-size:11.5px; font-weight:800; color:#820ad1; text-transform:uppercase; margin-bottom:6px; letter-spacing: 0.5px;">Senha</label>
@@ -2847,91 +2351,7 @@ function renderFeedView(container) {
 
         </div>
 
-        <!-- Right Widgets Sidebar -->
-        <div class="feed-widgets">
-            
-            <!-- Suggested Pets to Follow (Instagram-like suggest card) -->
-            <div class="card suggestions-card-ig">
-                <div class="suggestions-header-ig">
-                    <h3 class="widget-title">Sugestões de Amigos 🐾</h3>
-                    <span class="view-all-suggestions-ig" onclick="showToast('Buscando novos amiguinhos...', 'info')">Ver tudo</span>
-                </div>
-                <div class="suggestions-list-ig">
-                    <div class="suggestion-item-ig">
-                        <img src="assets/dog_avatar.png" alt="Bolinha" class="suggestion-avatar-ig">
-                        <div class="suggestion-info-ig">
-                            <span class="suggestion-name-ig">bolinha_poodle</span>
-                            <span class="suggestion-reason-ig">Amigo de Rex • Ativo</span>
-                        </div>
-                        <button class="btn-follow-ig ${state.followedCreators && state.followedCreators.includes('bolinha_poodle') ? 'following' : ''}" onclick="toggleFollowSuggestion(this, 'bolinha_poodle')">
-                            ${state.followedCreators && state.followedCreators.includes('bolinha_poodle') ? 'Seguindo' : 'Seguir'}
-                        </button>
-                    </div>
-                    <div class="suggestion-item-ig">
-                        <img src="assets/reels_kitten.png" alt="Amora" class="suggestion-avatar-ig">
-                        <div class="suggestion-info-ig">
-                            <span class="suggestion-name-ig">amora_persian</span>
-                            <span class="suggestion-reason-ig">Próximo a você (400m)</span>
-                        </div>
-                        <button class="btn-follow-ig ${state.followedCreators && state.followedCreators.includes('amora_persian') ? 'following' : ''}" onclick="toggleFollowSuggestion(this, 'amora_persian')">
-                            ${state.followedCreators && state.followedCreators.includes('amora_persian') ? 'Seguindo' : 'Seguir'}
-                        </button>
-                    </div>
-                    <div class="suggestion-item-ig">
-                        <img src="assets/cat_avatar.png" alt="Pipoca" class="suggestion-avatar-ig">
-                        <div class="suggestion-info-ig">
-                            <span class="suggestion-name-ig">pipoca_beagle</span>
-                            <span class="suggestion-reason-ig">Novo no Conexão Pet</span>
-                        </div>
-                        <button class="btn-follow-ig ${state.followedCreators && state.followedCreators.includes('pipoca_beagle') ? 'following' : ''}" onclick="toggleFollowSuggestion(this, 'pipoca_beagle')">
-                            ${state.followedCreators && state.followedCreators.includes('pipoca_beagle') ? 'Seguindo' : 'Seguir'}
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Trending Hashtags -->
-            <div class="card">
-                <h3 class="widget-title">Tendências Pets 🔥</h3>
-                <div class="trends-list">
-                    <div class="trend-item" onclick="filterFeedByTag('Cachorros')">
-                        <span class="trend-tag">#Cachorros</span>
-                        <span class="trend-count">1.5k posts</span>
-                    </div>
-                    <div class="trend-item" onclick="filterFeedByTag('Gatos')">
-                        <span class="trend-tag">#Gatos</span>
-                        <span class="trend-count">924 posts</span>
-                    </div>
-                    <div class="trend-item" onclick="filterFeedByTag('Adoção')">
-                        <span class="trend-tag">#Adoção</span>
-                        <span class="trend-count">840 posts</span>
-                    </div>
-                    <div class="trend-item" onclick="filterFeedByTag('GoldenRetriever')">
-                        <span class="trend-tag">#GoldenRetriever</span>
-                        <span class="trend-count">321 posts</span>
-                    </div>
-                    <div class="trend-item" onclick="filterFeedByTag('PetsDoBrasil')">
-                        <span class="trend-tag">#PetsDoBrasil</span>
-                        <span class="trend-count">560 posts</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Sponsor Advertisement -->
-            <div class="card" style="padding: 16px;">
-                <span class="sponsored-badge">Patrocinado</span>
-                <div class="sponsored-ad-card" style="margin-top: 8px;">
-                    <img src="assets/feed_dog_park.png" class="sponsored-ad-img" alt="Pet Shop Ad">
-                    <div>
-                        <h4 style="font-size: 13px;">PetShop VIP 15% OFF</h4>
-                        <p style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">Cupom: CONEXAOPET15 em toda a linha de brinquedos ecológicos!</p>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-    `;
+        <!-- Right Widgets Sidebar -->\n        <div class="feed-widgets">\n        </div>\n    </div>\n    `;
     
     container.innerHTML = feedHtml;
     
