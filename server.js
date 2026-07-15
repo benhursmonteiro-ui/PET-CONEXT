@@ -10,6 +10,12 @@ const DB_FILE = path.join(__dirname, 'database.json');
 app.use(cors());
 app.use(express.json());
 
+// Logger middleware to show requests in the terminal
+app.use((req, res, next) => {
+    console.log(`[${new Date().toLocaleTimeString()}] ${req.method} ${req.url}`);
+    next();
+});
+
 // Disable cache in development so changes appear immediately
 app.use((req, res, next) => {
     res.set('Cache-Control', 'no-store, no-cache, must-revalidate, private');

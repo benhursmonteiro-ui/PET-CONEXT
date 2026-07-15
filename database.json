@@ -399,7 +399,7 @@
       "userJoined": false
     }
   ],
-  "activeTab": "feed",
+  "activeTab": "landing",
   "mobileChatActive": false,
   "reports": [
     {
@@ -631,8 +631,8 @@
       ]
     }
   ],
-  "loggedIn": true,
-  "currentUserEmail": "carlos@petconect.com",
+  "loggedIn": false,
+  "currentUserEmail": null,
   "activePortalTab": "tutor",
   "activeProfileTab": "adopt",
   "campaignRaised": 14850,
