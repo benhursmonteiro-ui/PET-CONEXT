@@ -1152,9 +1152,6 @@ function renderLandingView(container) {
                                 Entrar com o Google
                             </button>
                             
-                            <button type="button" class="btn-guest" onclick="guestLogin()" style="width:100%; padding:14px; margin-top:10px; background:#f5f5f5; border:none; border-radius:30px; color:#111111; font-size:14.5px; font-weight:800; cursor:pointer; font-family:inherit;">
-                                👤 Entrar como Visitante
-                            </button>
                         </form>
                     </div>
 
@@ -1260,9 +1257,6 @@ function renderLoginView(container) {
                     Entrar com o Google
                 </button>
                 
-                <button type="button" class="btn-guest" onclick="guestLogin()">
-                    <span>👤</span> Entrar como Visitante
-                </button>
             </form>
             <div class="login-footer">
                 <span>Não tem uma conta? <a onclick="navigateToTab('register')">Cadastre-se</a></span>
