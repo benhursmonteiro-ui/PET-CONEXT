@@ -910,7 +910,7 @@ function handlePortalLoginSubmit(event, role) {
         }
         saveStateToLocalStorage();
         updateGlobalUIHeaders();
-        showToast(`Bem-vindo ao PetConnect, ${user.tutor.name}! 🐾`, 'success');
+        showToast(`Bem-vindo ao Conexão Pet, ${user.tutor.name}! 🐾`, 'success');
         document.body.classList.remove('logged-out');
         navigateToTab('feed');
     } else {
@@ -931,7 +931,7 @@ function renderLandingView(container) {
             <header style="width: 100%; max-width: 1100px; display: flex; justify-content: space-between; align-items: center; padding: 20px 24px; background: #ffffff; border-bottom: 1px solid #f0f0f0; position: sticky; top: 0; z-index: 1000; box-sizing: border-box;">
                 <div style="display: flex; align-items: center; gap: 6px; cursor: pointer;" onclick="window.scrollTo({top:0, behavior:'smooth'})">
                     <span style="font-size: 26px; color: #820ad1;">🐾</span>
-                    <span style="font-size: 22px; font-weight: 900; color: #820ad1; letter-spacing: -0.5px;">petconnect</span>
+                    <span style="font-size: 22px; font-weight: 900; color: #820ad1; letter-spacing: -0.5px;">conexão pet</span>
                 </div>
                 <nav style="display: flex; gap: 24px; font-size: 14.5px; font-weight: 700; align-items: center;">
                     <a href="#about-section" style="color: #666666; text-decoration: none; transition: color 0.2s;">Sobre</a>
@@ -949,7 +949,7 @@ function renderLandingView(container) {
                     <h1 style="font-size: 46px; font-weight: 900; margin: 0 0 20px 0; line-height: 1.1; color: #111111; letter-spacing: -1px;">
                         Um mundo pet <br>
                         <span style="color: #820ad1;">sem complicação</span>. <br>
-                        Escolha o PetConnect.
+                        Escolha o Conexão Pet.
                     </h1>
                     <p style="font-size: 17.5px; line-height: 1.55; color: #4a4a4a; margin: 0 0 36px 0; max-width: 520px;">
                         A rede social, carteira digital de vacinas e agendamento para o seu melhor amigo, tudo em um só lugar. Seguro, transparente e totalmente gratuito.
@@ -1002,9 +1002,9 @@ function renderLandingView(container) {
                         </p>
                         
                         <div style="background: rgba(255, 255, 255, 0.1); border-left: 4px solid #ffffff; padding: 20px; border-radius: 4px; margin-top: 8px;">
-                            <strong style="font-size: 16px; display: block; margin-bottom: 6px; color: #ffffff;">🐾 O Nascimento do PetConnect</strong>
+                            <strong style="font-size: 16px; display: block; margin-bottom: 6px; color: #ffffff;">🐾 O Nascimento do Conexão Pet</strong>
                             <p style="margin: 0; font-size: 14px; opacity: 0.95;">
-                                O <strong>PetConnect</strong> nasceu dentro desse contexto, como uma proposta inovadora para conectar pessoas apaixonadas por animais, promover a adoção responsável, aproximar instituições do setor pet da comunidade e oferecer ferramentas que contribuam para o cuidado, a proteção e o bem-estar dos animais. Dessa forma, o projeto representa a aplicação prática dos conhecimentos adquiridos no Laboratório Juventudes, demonstrando como a tecnologia pode ser utilizada para gerar impacto positivo e fortalecer a relação entre pessoas, pets e instituições.
+                                O <strong>Conexão Pet</strong> nasceu dentro desse contexto, como uma proposta inovadora para conectar pessoas apaixonadas por animais, promover a adoção responsável, aproximar instituições do setor pet da comunidade e oferecer ferramentas que contribuam para o cuidado, a proteção e o bem-estar dos animais. Dessa forma, o projeto representa a aplicação prática dos conhecimentos adquiridos no Laboratório Juventudes, demonstrando como a tecnologia pode ser utilizada para gerar impacto positivo e fortalecer a relação entre pessoas, pets e instituições.
                             </p>
                         </div>
                     </div>
@@ -1075,10 +1075,10 @@ function renderLandingView(container) {
                             Parceria Institucional
                         </div>
                         <h2 style="font-size: 30px; font-weight: 900; margin: 0 0 16px 0; color: #111111; letter-spacing: -0.8px; line-height: 1.2;">
-                            🤝 Torne-se um Patrocinador Oficial do PetConnect
+                            🤝 Torne-se um Patrocinador Oficial do Conexão Pet
                         </h2>
                         <p style="font-size: 14.5px; color: #555555; line-height: 1.6; margin: 0 0 16px 0;">
-                            O <strong>PetConnect</strong> oferece uma oportunidade exclusiva para pet shops, clínicas veterinárias, empresas e marcas do segmento pet divulgarem seus produtos e serviços enquanto contribuem para o crescimento da maior comunidade dedicada aos amantes de animais.
+                            O <strong>Conexão Pet</strong> oferece uma oportunidade exclusiva para pet shops, clínicas veterinárias, empresas e marcas do segmento pet divulgarem seus produtos e serviços enquanto contribuem para o crescimento da maior comunidade dedicada aos amantes de animais.
                         </p>
                         <p style="font-size: 14.5px; color: #555555; line-height: 1.6; margin: 0 0 20px 0;">
                             Ao se tornar um patrocinador, sua empresa recebe um perfil empresarial com selo de <strong>Patrocinador Oficial</strong>, maior visibilidade dentro da plataforma e acesso a recursos exclusivos para fortalecer sua marca e alcançar novos clientes.
@@ -1107,8 +1107,8 @@ function renderLandingView(container) {
                             <div style="font-size: 11px; color: #999999; margin-top: 4px;">* Sem taxa de adesão, cancelamento a qualquer momento.</div>
                         </div>
                         
-                        <button onclick="scrollToLoginPortal(); switchPortalTab('petshop');" style="width: 100%; padding: 12px; border: none; background: #820ad1; color: #ffffff; font-size: 13.5px; font-weight: 800; border-radius: 30px; cursor: pointer; transition: background 0.2s; font-family: inherit; text-align: center; box-shadow: 0 4px 15px rgba(130,10,209,0.15);">
-                            Seja um Patrocinador Oficial ➔
+                        <button onclick="openSponsorWhatsApp()" style="width: 100%; padding: 12px; border: none; background: #820ad1; color: #ffffff; font-size: 13.5px; font-weight: 800; border-radius: 30px; cursor: pointer; transition: background 0.2s; font-family: inherit; text-align: center; box-shadow: 0 4px 15px rgba(130,10,209,0.15); display: flex; align-items: center; justify-content: center; gap: 8px;">
+                            💬 Seja um Patrocinador Oficial (WhatsApp) ➔
                         </button>
                     </div>
                 </div>
@@ -1209,8 +1209,8 @@ function renderLandingView(container) {
                                 <span style="font-size: 20px; font-weight: 900;">R$ 150,00</span>
                                 <span style="font-size: 11px; color: #bca0dc;">/mês</span>
                             </div>
-                            <button type="button" onclick="document.getElementById('official-sponsor-section').scrollIntoView({ behavior: 'smooth' });" style="width: 100%; padding: 10px; border: none; background: linear-gradient(90deg, #820ad1, #a872e6); color: #ffffff; font-size: 13px; font-weight: 800; border-radius: 30px; cursor: pointer; font-family: inherit; box-shadow: 0 4px 15px rgba(130,10,209,0.3); transition: opacity 0.2s;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">
-                                Quero ser Patrocinador 💎
+                            <button type="button" onclick="openSponsorWhatsApp()" style="width: 100%; padding: 10px; border: none; background: linear-gradient(90deg, #820ad1, #a872e6); color: #ffffff; font-size: 13px; font-weight: 800; border-radius: 30px; cursor: pointer; font-family: inherit; box-shadow: 0 4px 15px rgba(130,10,209,0.3); transition: opacity 0.2s;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">
+                                Quero ser Patrocinador (WhatsApp) 💬
                             </button>
                         </div>
                     </div>
@@ -1224,7 +1224,7 @@ function renderLandingView(container) {
 
             <!-- Footer (Nubank layout: corporate and minimal) -->
             <footer style="width: 100%; text-align: center; padding: 40px 24px; background: #ffffff; border-top: 1px solid #f0f0f0; color: #666666; font-size: 12.5px; box-sizing: border-box;">
-                <p style="margin: 0 0 8px 0; font-weight: 800; color: #820ad1;">petconnect 🐾</p>
+                <p style="margin: 0 0 8px 0; font-weight: 800; color: #820ad1;">conexão pet 🐾</p>
                 <p style="margin: 0 0 6px 0; opacity: 0.85;">Senac Aprendiz · Laboratório Juventudes · Projeto de Impacto Social 2026</p>
                 <p style="font-size:11px; opacity: 0.6; margin: 0;">Unidade: Senac - Picos • Formação em Serviços de Supermercados</p>
             </footer>
@@ -1290,7 +1290,7 @@ function loginWithGoogle() {
                 name: user.displayName || 'Tutor',
                 email: user.email,
                 avatar: user.photoURL || 'assets/tutor_avatar.png',
-                bio: 'Novo membro do PetConnect!'
+                bio: 'Novo membro do Conexão Pet!'
             };
             saveStateToLocalStorage();
             updateGlobalUIHeaders();
@@ -1717,7 +1717,7 @@ function handleLoginSubmit(event) {
                 name: user.displayName || user.email.split('@')[0],
                 email: user.email,
                 avatar: user.photoURL || 'assets/tutor_avatar.png',
-                bio: 'Novo membro do PetConnect!'
+                bio: 'Novo membro do Conexão Pet!'
             };
             saveStateToLocalStorage();
             updateGlobalUIHeaders();
@@ -6861,7 +6861,7 @@ function updateProfileGallery() {
         `;
     } else if (profileType === 'petshop' && tab === 'coupons') {
         const petShopCoupons = [
-            { code: 'PETCONECT10', desc: '10% de desconto em todo o catálogo de produtos.', type: 'Desconto' },
+            { code: 'Conexão Pet10', desc: '10% de desconto em todo o catálogo de produtos.', type: 'Desconto' },
             { code: 'FRETEGRATIS', desc: 'Frete grátis para compras a partir de R$ 150,00.', type: 'Frete Grátis' },
             { code: 'BRINQUE20', desc: '20% de desconto em qualquer brinquedo.', type: 'Brinquedos' }
         ];
@@ -9625,3 +9625,11 @@ window.toggleMobileMenu = function() {
         if (backdrop) backdrop.classList.add('active');
     }
 };
+
+// Funçao para abrir o WhatsApp do patrocinador
+window.openSponsorWhatsApp = function() {
+    const phone = '5589994472931';
+    const message = encodeURIComponent('Olá! Gostaria de saber mais sobre como ser um Patrocinador Oficial do Conexão Pet.');
+    window.open(`https://wa.me/${phone}?text=${message}`, '_blank');
+};
+

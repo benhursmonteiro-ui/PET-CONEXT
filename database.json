@@ -1,13 +1,65 @@
 {
   "theme": "light",
   "tutor": {
-    "name": "Ben Hur Sousa Monteiro",
-    "email": "benhur.s.monteiro@gmail.com",
-    "avatar": "https://lh3.googleusercontent.com/a/ACg8ocLorbpzqGnLM4ia9LRcMYKwZABGILJIbPX-olPI7akdMcLLWl0HLg=s96-c",
-    "bio": "Novo membro do PetConnect!"
+    "name": "Usuário",
+    "location": "",
+    "bio": "",
+    "avatar": "assets/tutor_avatar.png",
+    "friendsCount": 0,
+    "followersCount": 0
   },
   "pets": [],
-  "feed": [],
+  "feed": [
+    {
+      "id": "post-mock-3",
+      "authorName": "Luna Boxer",
+      "authorAvatar": "assets/dog_avatar.png",
+      "time": "Há 1 dia",
+      "text": "Minha cara quando ouço barulho de sacola de petisco abrindo... Quem mais é assim? 🐶😂 #FomePet #Comilão #BoxerLove",
+      "image": "assets/dog_avatar.png",
+      "likes": 120,
+      "liked": false,
+      "comments": []
+    },
+    {
+      "id": "post-mock-4",
+      "authorName": "Thor Husky",
+      "authorAvatar": "assets/reels_kitten.png",
+      "time": "Há 2 dias",
+      "text": "Cantando a música do meu povo às 3 da manhã para garantir que todos estão seguros. De nada, humanos! 🐺🎤 #HuskySiberiano #DramaQueen",
+      "image": "assets/reels_kitten.png",
+      "likes": 310,
+      "liked": true,
+      "comments": [
+        {
+          "author": "Mel (Persa Fluffy)",
+          "text": "Chato demais! Quero dormir! 😾"
+        }
+      ]
+    },
+    {
+      "id": "post-mock-5",
+      "authorName": "Pipoca Poodle",
+      "authorAvatar": "assets/dog_avatar.png",
+      "time": "Há 3 dias",
+      "text": "Pronta para o passeio de domingo com meu lacinho novo! Sou a princesa ou não sou? 🎀🐩 #PoodleToy #LookDoDia #PetFofura",
+      "image": "assets/feed_dog_park.png",
+      "likes": 95,
+      "liked": false,
+      "comments": []
+    },
+    {
+      "id": "post-mock-6",
+      "authorName": "Bidu Schnauzer",
+      "authorAvatar": "assets/cat_avatar.png",
+      "time": "Há 4 dias",
+      "text": "Só de olho nessa conversa de vocês sobre dieta... Onde assino para ter mais sachê? 🐾🍗 #SchnauzerBrasil #PetShop #VidaSaudavel",
+      "image": "assets/cat_avatar.png",
+      "likes": 154,
+      "liked": false,
+      "comments": []
+    }
+  ],
   "reels": [],
   "activeReelIndex": 0,
   "friends": [],
@@ -118,7 +170,5 @@
   ],
   "activeReelsTab": "para-voce",
   "followedCreators": [],
-  "loggedIn": false,
-  "activePortalTab": "tutor",
-  "currentUserEmail": null
+  "loggedIn": false
 }
