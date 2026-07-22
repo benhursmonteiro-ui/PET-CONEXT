@@ -966,9 +966,16 @@ function renderLandingView(container) {
                     </div>
                 </div>
 
-                <!-- Right visual column: Official Conexão PET Logo Image -->
-                <div style="flex: 0.8; display: flex; justify-content: center; min-width: 300px; padding: 20px; box-sizing: border-box;">
-                    <img src="assets/logo.png" alt="Conexão PET Logo" style="width: 100%; max-width: 260px; height: auto; object-fit: contain; filter: drop-shadow(0 8px 16px rgba(130, 10, 209, 0.12));">
+                <!-- Right visual column: Official Conexão PET Logo Image and QR Code -->
+                <div style="flex: 0.8; display: flex; flex-direction: column; align-items: center; justify-content: center; min-width: 280px; padding: 20px; box-sizing: border-box; gap: 20px;">
+                    <img src="assets/logo.png" alt="Conexão PET Logo" style="width: 100%; max-width: 220px; height: auto; object-fit: contain; filter: drop-shadow(0 8px 16px rgba(130, 10, 209, 0.12));">
+                    
+                    <!-- QR Code Card -->
+                    <div style="background: #ffffff; padding: 14px; border-radius: 16px; border: 1.5px solid #f0e6ff; box-shadow: 0 10px 25px rgba(130, 10, 209, 0.08); text-align: center; max-width: 210px; width: 100%; box-sizing: border-box;">
+                        <img src="assets/qrcode.png" alt="QR Code Conexão Pet" style="width: 100%; max-width: 160px; height: auto; border-radius: 8px; display: block; margin: 0 auto 8px auto;">
+                        <span style="font-size: 12.5px; font-weight: 800; color: #820ad1; display: block;">Escaneie o QR Code 📲</span>
+                        <span style="font-size: 11px; color: #64748b; display: block; margin-top: 2px; font-weight: 600;">Acesse direto no celular</span>
+                    </div>
                 </div>
 
             </section>
